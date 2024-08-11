@@ -1,0 +1,1 @@
+<video src="<?= base_url('assets/videos/blue-bubbles.mp4') ?>" class="background" id="background" autoplay muted loop poster="<?= base_url('assets/images/abstract-blue-wallpaper.jpg') ?>"></video>

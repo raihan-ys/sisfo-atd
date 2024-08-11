@@ -1,0 +1,296 @@
+/* body */
+body {
+    background-size: cover;
+}
+/* /.body */
+
+/* container */
+.container-fluid {
+    width: auto;
+}
+/* /.container */
+
+/* text */
+.text-tomato {
+    color: tomato;
+}
+/* /.text */
+
+/* background */
+.background {
+    min-height: 100%;
+    min-width: 100%;
+    height: 100vh;
+    width: 100vw;
+    object-fit: cover;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+}
+/* /.background */
+
+/* image */
+.avatar-preview {
+    background-color: orange;
+    border: 2px solid orange;
+    max-height: 300px;
+    max-width: 300px;
+}
+.avatar-preview-invalid {
+    background-color: red;
+    border: 3px solid red;
+    max-height: 300px;
+    max-width: 300px;
+}
+.article-image-preview {
+    background-color: lightgreen;
+    border: 3px solid lightgreen;
+    max-height: 800px;
+    max-width: 800px;
+}
+.article-image-preview-invalid {
+    background-color: red;
+    border: 3px solid red;
+    max-height: 800px;
+    max-width: 800px
+}
+/* /.image */
+
+/* input */
+.input {
+    border-radius: 20px;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 5px;
+    width: 330px;
+}
+.input:focus {
+    outline-color: dodgerblue;
+}
+.input-invalid {
+    border: 1px solid red;
+    border-radius: 20px;
+    color: red;
+    font-family: sans-serif;
+    font-weight: bolder;
+    font-size: 16px;
+    padding: 5px;
+    width: 330px;
+}
+.input-invalid:focus {
+    outline-color: red;
+}
+.input-invalid::placeholder {
+    color: tomato;
+}
+/* /.input */
+
+/* button */
+.btn-submit {
+    background-color: skyblue;
+    border-radius: 20px;
+    font-size: 20px;
+    width: 150px;
+}
+.btn-reset {
+    background-color: khaki;
+    border-radius: 20px;
+    font-size: 20px;
+    width: 150px;
+}
+/* /.button */
+
+/* article */
+.article {
+    padding: 0 2em;
+    padding-top: 20px;
+}
+.article .post-title {
+    font-family: sans;
+    font-weight: bolder;
+}
+.article .post-meta {
+    color: grey;
+    font-family: sans;
+    font-size: 20px;
+}
+.article .post-body {
+    font-size: 23px;
+    line-height: 1.6rem;
+}
+/* /.article */
+
+/* mahasiswa */
+.mhs-input-img {
+	width: 150px;
+}
+.mhs-input-header {
+    background-color: orangered;
+    border-radius: 10px;
+    color: white;
+	font-family: sans-serif;
+	font-size: 30px;
+    font-weight: bold;
+    width: 500px;
+}
+.mhs-td-label {
+    align-items: flex-start;
+	display: flex;
+}
+.mhs-label {
+    color: yellow;
+    font-size: 20px;
+	font-weight: bold;
+}
+.mhs-tb-header {
+	background-color: crimson;
+    color: white;
+    padding-bottom: 5px;
+    padding-top: 10px;
+}
+.mhs-tb-footer {
+    background-color: crimson;
+    color: white;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-top: 5px;
+}
+.mhs-tb-title {
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+	padding-top: 5px;
+}
+.mhs-th {
+    background-color: springgreen;
+    font-family: sans-serif;
+	font-size: 21px;
+    padding: 5px;
+	text-align: center;
+}
+.mhs-tr {
+    font-family: sans-serif;
+	font-size: 17px;
+	font-weight: bold;
+}
+.mhs-td {
+	padding: 8px;
+	font-size: 20px;
+}
+.mhs-td-action {
+    background-color: skyblue;
+	padding: 5px;
+    text-align: center;
+}
+.mhs-btn-edit {
+    background-color: paleturquoise;
+    border-radius: 25px;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    height: 30px;
+    width: 108px;
+}
+.mhs-img-edit {
+	margin-bottom: 5px; 
+    margin-left: 5px;
+}
+.mhs-btn-delete {
+    background-color: tomato;
+    border-radius: 25px;
+	font-family: sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    height: 30px;
+    margin-top: 10px;
+    width: 108px;
+}
+.mhs-img-delete {
+	margin-bottom: 5px; 
+    margin-left: 5px;
+}
+.mhs-btn-truncate {
+    background-color: lightsalmon;
+    border-radius: 25px;
+    font-size: 18px;
+    font-weight: bold;
+    height: 30px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    margin-right: 5px;
+    width: 250px;
+}
+/* /.mahasiswa */
+
+/* pagination */
+.pagination-mahasiswa {
+    padding-top: 5px;
+}
+.pagination-mahasiswa a,
+.pagination-mahasiswa strong {
+    background-color: #0b8db9;
+    border: 1px solid silver;
+    border-radius: 8px;
+    color: white;
+    margin-right: 0.5em;
+    padding: 0.5em;
+}
+.pagination-mahasiswa a:hover,
+.pagination-mahasiswa strong {
+    background-color: #008cba;
+    border: 1px solid #008cba;
+    color: white;  
+}
+.pagination-article {
+    padding-top: 5px;
+}
+.pagination-article a,
+.pagination-article strong {
+    border: 1px solid black;
+    border-radius: 8px;
+    color: black;
+    margin-right: 0.5em;
+    padding: 0.5em;
+}
+.pagination-article a:hover,
+.pagination-article strong {
+    background-color: #008cba;
+    border: 1px solid #008cba;
+    color: white;  
+}
+/* /.pagination */
+
+/* avatar-upload */
+.avatar-upload-field {
+    display: none;
+}
+.label-upload input[type="file"] {
+    position: absolute;
+    top: -1000px;
+}
+.label-upload {
+    background-color: lightgreen;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    margin: 5px;
+    padding: 5px 15px;
+}
+.label-upload:hover {
+  background: #5cbd95;
+}
+.label-upload:active {
+  background: #9fa1a0;
+}
+.label-upload:invalid+span {
+  color: #000000;
+}
+.label-upload:valid+span {
+  color: #ffffff;
+}
+/* /.avatar-upload */
