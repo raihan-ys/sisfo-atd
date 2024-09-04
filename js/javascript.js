@@ -1,50 +1,42 @@
-// Get the HTML elements.
-const nav_buttons = document.querySelectorAll(".nav-btn")
+$(document).ready(function() {
+	// Get the HTML elements.
+	const nav_buttons = $(".nav-btn");
+	const background = $("#background");
+	const btn_background = $("#btn-background");
+	const intro_pic = $("#intro-pic");
+	const intro_name = $("#intro-name");
+	const closeAlert = $("#closeAlert");
+	const alertDiv = $("#alertDiv");
 
-const background = document.getElementById("background")
+	// Change the navbar button's color.
+	nav_buttons.on('click', function() {
+		$(this).css('background', 'dodgerblue');
+	});
 
-const btn_background = document.getElementById("btn-background")
-
-const intro_pic = document.getElementById("intro-pic")
-
-const intro_name = document.getElementById("intro-name")
- 
-// change the navbar button's color.
-// iterate each elements with the class 'nav-btn', and give them an eventListener.
-nav_buttons.forEach(function(element) {
-	element.addEventListener(
-		'click',
-		function() {
-			element.style.background = 'dodgerblue'
-	})
-})
-
-// play or pause the video.
-btn_background.addEventListener(
-	'click',
-	function switchVideo() {
+	// Play or pause the background video.
+	btn_background.on('click', function() {
 		if (background.paused) {
-      background.play()
-      btn_background.innerHTML = '<i class="fas fa-pause"></i>'
-    } else {
-      background.pause()
-      btn_background.innerHTML = '<i class="fas fa-play"></i>'
-    }
-	}
-)
+			background.play();
+			btn_background.html('<i class="fas fa-pause"></i>');
+		} else {
+			background[0].pause();
+			btn_background.html('<i class="fas fa-play"></i>');
+		}
+	});
 
-// change the homepage picture and name.
-intro_pic.addEventListener(
-	'mouseover',
-	function onmouseover() {
-		intro_pic.src = '../assets/images/one-piece-2.jpg'
-		intro_name.innerText = '🔥 MONKEY D LUFFY 🔥'
-	}
-)
-intro_pic.addEventListener(
-	'mouseout',
-	function onmouseout() {
-		intro_pic.src = '../assets/images/one-piece.jpg'
-		intro_name.innerText = '_RAINHARDER'
-	}
-)
+	// Change the homepage picture and name.
+	intro_pic.on('mouseover', function() {
+		intro_pic.attr('src', '../assets/images/one-piece-2.jpg');
+		intro_name.text('🔥 MONKEY D LUFFY 🔥');
+	}).on('mouseout', function() {
+		intro_pic.attr('src', '../assets/images/one-piece.jpg');
+		intro_name.text('_RAINHARDER');
+	});
+
+	// Close all alerts
+	closeAlert.click(function() {
+		alertDiv.fadeOut(400, function() {
+			$(this).remove();
+		});
+	});
+});

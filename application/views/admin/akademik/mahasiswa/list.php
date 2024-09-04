@@ -10,10 +10,8 @@ $this->load->view('templates/background');
   
   <div class="wrapper">
 
-    <?php 
-    $this->load->view('templates/sidebar');
-    $this->load->view('templates/navbar'); 
-    ?>
+    <?php $this->load->view('templates/sidebar'); ?>
+    <?php $this->load->view('templates/navbar'); ?>
 
     <!-- Content Wrapper -->
     <div class="bg-transparent content-wrapper p-3">
@@ -37,10 +35,10 @@ $this->load->view('templates/background');
 
                     <!-- flashdata -->
                     <?php if ($this->session->flashdata('mahasiswa_deleted')) : ?>
-                    <div class="alert alert-dismissible fade show bg-lime" role="alert" style="width: 350px">
+                    <div class="alert alert-dismissible fade show bg-lime" id="alertDiv" style="width: 350px">
                       <h4><?= $this->session->flashdata('mahasiswa_deleted') ?> <i class="fas fa-trash"></i></h4>
                       <?php $this->session->unset_userdata('mahasiswa_deleted') ?>
-                      <button title="close this notification" type="button" class="close" data-dismiss="alert" aria-label="close">
+                      <button type="button" id="closeAlert" class="close" aria-label="close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>

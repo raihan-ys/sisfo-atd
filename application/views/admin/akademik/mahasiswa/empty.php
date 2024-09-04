@@ -34,21 +34,21 @@ $this->load->view('templates/background');
 
                   <div align="center">
 
-                  <!-- flashdata -->
+                    <!-- flashdata -->
                     <?php if ($this->session->flashdata('mahasiswa_deleted')) : ?>
-                    <div class="alert alert-dismissible fade show bg-lime" role="alert" style="width: 380px">
+                    <div class="alert alert-dismissible fade show bg-lime" id="alertDiv" style="width: 380px">
                       <h4><?= $this->session->flashdata('mahasiswa_deleted') ?> <i class="fas fa-trash"></i></h4>
                       <?php $this->session->unset_userdata('mahasiswa_deleted') ?>
-                      <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                      <button type="button" class="close" id="closeAlert" aria-label="close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
 
                     <?php elseif ($this->session->flashdata('mahasiswa_truncated')) : ?>
-                    <div class="alert alert-dismissible fade show bg-lime" role="alert" style="width: 500px">
+                    <div class="alert alert-dismissible fade show bg-lime" id="alertDiv" style="width: 500px">
                       <h4><?= $this->session->flashdata('mahasiswa_truncated') ?> <i class="fas fa-fire"></i></h4>
                       <?php $this->session->unset_userdata('mahasiswa_truncated') ?>
-                      <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                      <button type="button" class="close" id="closeAlert" aria-label="close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>

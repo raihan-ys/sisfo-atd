@@ -37,28 +37,28 @@ $this->load->view('templates/background');
 							<!-- flashdata -->
 							<?php if ($this->session->flashdata('post_saved')): ?>
 							&nbsp &nbsp &nbsp
-							<span class="alert alert-dismissible fade show bg-lime" role="alert">
+							<span class="alert alert-dismissible fade show bg-lime" id="alertDiv">
 								<b><?= $this->session->flashdata('post_saved') ?></b> 👍
 								<?php $this->session->unset_userdata('post_saved') ?>
-								<button type="button" class="close" data-dismiss="alert" aria-label="close">
+								<button type="button" class="close" id="closeAlert" aria-label="close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</span>
 							<?php elseif ($this->session->flashdata('post_updated')): ?>
 								&nbsp &nbsp &nbsp
-							<span class="alert alert-dismissible fade show bg-lime" role="alert">
+							<span class="alert alert-dismissible fade show bg-lime" id="alertDiv">
 								<b><?= $this->session->flashdata('post_updated') ?></b> 👍
 								<?php $this->session->unset_userdata('post_updated') ?>
-								<button type="button" class="close" data-dismiss="alert" aria-label="close">
+								<button type="button" class="close" id="closeAlert" aria-label="close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</span>
 							<?php elseif ($this->session->flashdata('post_deleted')): ?>
 							&nbsp &nbsp &nbsp
-							<span class="alert alert-dismissible fade show bg-lime" role="alert">
+							<span class="alert alert-dismissible fade show bg-lime" id=alertDiv"">
 								<b><?= $this->session->flashdata('post_deleted') ?></b> <i class="fas fa-trash"></i>
 								<?php $this->session->unset_userdata('post_deleted') ?>
-								<button type="button" class="close" data-dismiss="alert" aria-label="close">
+								<button type="button" class="close" id="closeAlert" aria-label="close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</span>
@@ -76,7 +76,7 @@ $this->load->view('templates/background');
 								<form method="GET">
 									<!-- input keyword -->
 									<input type="search" title="Enter the keyword" class="input" name="keyword" placeholder="Cari judul atau isi konten..." value="<?= html_escape($keyword) ?>" maxlength="255">
-									&nbsp; &nbsp; &nbsp; 
+									&nbsp; &nbsp; &nbsp;
 
 									<!-- select status -->
 									<select title="Select status" class="input" name="status">
@@ -120,12 +120,12 @@ $this->load->view('templates/background');
 							?>
 							<tr>
 
-								<!-- index column -->
+								<!-- index -->
 								<td class="text-center font-weight-bold" style="vertical-align: middle" bgcolor="skyblue">
-									<?= $i.'.'; $i++ ?>
+									<?= $i++.'.'; ?>
 								</td>
 								
-								<!-- title and image column -->
+								<!-- content -->
 								<td style="padding-left: 50px;vertical-align: middle">
 									<!-- image -->
 									<div>
@@ -133,9 +133,11 @@ $this->load->view('templates/background');
 										src="<?= $article->image ? base_url('uploads/article-image/'.$article->image) : base_url('assets/images/atd-logo.png') ?>" alt="<?= $article->title ?>">
 									</div>
 
-									<!-- title -->
+									<!-- content -->
 									<div class="font-weight-bold text-info h4"><?= $article->title ?></div>
-									<div class="text-dark"><?= substr($article->content, 0, 200) ?></div>
+									<div class="text-dark">
+										<?= strlen($article->content) > 200 ? substr($article->content, 0, 200).'...' : $article->content ?>
+									</div>
 
 									<!-- created at and updated at -->
 									<div class="text-secondary">
@@ -148,19 +150,19 @@ $this->load->view('templates/background');
 									</div>
 								</td>
 
-								<!-- status column -->
+								<!-- status -->
 								<td bgcolor="papayawhip" align="center" style="vertical-align: middle">
 									<font class="<?= $article->draft === 'true' ? 'text-secondary' : 'text-success' ?> font-weight-bold" size="4">
 										<?= $article->draft === 'true' ? 'Draft' : 'Published' ?>
 									</font>
 								</td>
 
-								<!-- writer column-->
+								<!-- writer -->
 								<td align="center" style="vertical-align: middle">
 									<font class="text-primary font-weight-bold" size="4"><?= $article->user ?></font>
 								</td>
 	
-								<!-- action column -->
+								<!-- action -->
 								<td bgcolor="skyblue" align="center" style="vertical-align: middle">
 									<div>
 										<a href="<?= site_url('article/show/'.$article->slug) ?>" class="btn btn-small btn-info" title="PREVIEW" role="button" target="_blank">

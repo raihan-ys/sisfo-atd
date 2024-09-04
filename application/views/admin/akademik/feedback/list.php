@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php 
-$this->load->view('templates/head'); 
-$this->load->view('templates/background'); 
-?>
+<?php $this->load->view('templates/head'); ?>
+<?php $this->load->view('templates/background'); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
 
 	<!-- wrapper -->
 	<div class="wrapper">
 
-		<?php 
-		$this->load->view('templates/sidebar');
-		$this->load->view('templates/navbar');
-		?>
+		<?php $this->load->view('templates/sidebar'); ?>
+		<?php $this->load->view('templates/navbar'); ?>
 
 		<!-- content -->
 		<div class="bg-transparent content-wrapper p-3">
@@ -28,10 +24,10 @@ $this->load->view('templates/background');
 
 				<!-- flashdata -->
 				<?php if ($this->session->flashdata('feedback_deleted')) : ?>
-				<div class="alert alert-dismissible fade show bg-success" align="center" role="alert" style="width: 320px">
+				<div class="alert alert-dismissible fade show bg-lime" id="alertDiv" style="width: 320px">
 					<b><?= $this->session->flashdata('feedback_deleted') ?></b> <i class="fas fa-trash"></i>
 					<?php $this->session->unset_userdata('feedback_deleted') ?>
-					<button type="button" class="close" data-dismiss="alert" aria-label="close">
+					<button type="button" class="close" id="closeAlert" aria-label="close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
@@ -53,8 +49,8 @@ $this->load->view('templates/background');
 							<i class="fas fa-trash"></i> Hapus
 						</a>
 					</div>
-					<?php endforeach ?>
 				</div>
+				<?php endforeach ?>
 				<!-- /.feedbacks -->
 			</div>
 			<!-- /. container-fluid -->

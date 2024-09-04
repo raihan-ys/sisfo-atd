@@ -17,10 +17,10 @@
   <?php endif ?>
 </footer>
 
-<!-- JavaScript -->
+<!-- jQuery -->
+<script src="<?= base_url('assets/jquery/jquery.min.js') ?>"></script>
+<!-- Custom JS -->
 <script src="<?= base_url('js/javascript.js') ?>"></script>
 <script src="<?= base_url('js/calculator.js') ?>"></script>
-<!-- jQuery -->
-<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js"></script>
-<!-- AdminLTE App -->
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE app -->
+<script src="<?= base_url('assets/adminlte/dist/js/adminlte.min.js') ?>"></script>

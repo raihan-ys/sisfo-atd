@@ -7,29 +7,27 @@ $this->load->view('templates/background');
 ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-  	<div class="wrapper">
+  <div class="wrapper">
 
-		<?php 
-		$this->load->view('templates/sidebar'); 
-		$this->load->view('templates/navbar');
-		?>
+		<?php $this->load->view('templates/sidebar'); ?>
+		<?php $this->load->view('templates/navbar'); ?>
 
 		<div class="bg-transparent content-wrapper p-3">
 			<div class="container-fluid">
-				<table align="center" border="0" cellspacing="10" cellpadding="15">
+				<table class="mx-auto" cellspacing="10" cellpadding="15">
 
 					<!-- header -->
 					<tr>
-						<td colspan="2" align="center">
-							<img class="mhs-input-img" src="<?= base_url('assets/images/laptop-input.png') ?>"><br><br>	
-							<!-- title -->
-							<h2 class="mhs-input-header"><i class="far fa-circle fas fa-download"></i> Input Data Mahasiswa</h2>
+						<td colspan="2">
+							<img class="mhs-input-img mb-2 mx-auto d-block" src="<?= base_url('assets/images/laptop-input.png') ?>">
+							<h2 class="mhs-input-header p-1 text-center d-block"><i class="far fa-circle fas fa-download"></i> Input Data Mahasiswa</h2>
+							
 							<!-- flashdata -->
 							<?php if ($this->session->flashdata('mahasiswa_saved')) : ?>
-							<div class="alert alert-dismissible fade show bg-lime" role="alert" style="width: 380px">
+							<div class="alert alert-dismissible fade show bg-lime mx-auto d-block" id="alertDiv" style="width: 380px">
 								<h4 align="center"><?= $this->session->flashdata('mahasiswa_saved') ?> 👍</h4>
 								<?php $this->session->unset_userdata('mahasiswa_saved') ?>
-								<button title="Close this notification" type="button" class="close" data-dismiss="alert" aria-label="close">
+								<button type="button" id="closeAlert" class="close" aria-label="close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
@@ -173,6 +171,15 @@ $this->load->view('templates/background');
 		<!-- /.content-wrapper -->
 
 		<?php $this->load->view('templates/footer') ?>
+		<script>
+			$(document).ready(function() {
+				$("#closeAlert").click(function() {
+					$("#alertDiv").fadeOut(400, function() {
+						$(this).remove();
+					});
+				});
+			});
+		</script>
 
 	</div>
 	<!-- /.wrapper -->

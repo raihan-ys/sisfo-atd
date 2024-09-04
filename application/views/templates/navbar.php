@@ -45,16 +45,14 @@
   <ul class="navbar-nav ml-auto">
 
     <!-- login button -->
-    <?php if ($current_user === false) : ?>
-      <?php if ($title !== 'Login') : ?>
-        <li>
-          <a class="nav-link btn bg-lime font-weight-bold" role="button" title="Login if you're an administrator" href="<?= site_url('auth/login') ?>">
-            <i class="fas fa-key"></i> Login
-          </a>
-        </li>
-        &nbsp &nbsp
-        <?php endif ?>
-      <?php endif ?>
+    <?php if (!$current_user && $meta['title'] !== 'Login') : ?>
+      <li>
+        <a class="nav-link btn bg-lime font-weight-bold" role="button" title="Login if you're an administrator" href="<?= site_url('auth/login') ?>">
+          <i class="fas fa-key"></i> Login
+        </a>
+      </li>
+      &nbsp &nbsp
+    <?php endif ?>
 
     <!-- background video button -->
     <li>

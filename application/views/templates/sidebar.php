@@ -61,7 +61,6 @@
 
         <!-- pendaftaran menu -->
         <li class="nav-item">
-
           <a href="#" class="nav-link">
             <img class="nav-icon" src="<?= base_url('assets/images/googleforms-logo.png') ?>" alt="Google form logo">
             <p class="font-weight-bold">Pendaftaran <i class="right fas fa-angle-left"></i>
@@ -69,28 +68,27 @@
           </a>
 
           <ul class="nav nav-treeview bg-primary">
-
             <!-- mahasiswa -->
             <li class="nav-item">
               <a class="nav-link" title="Pendaftaran mahasiswa melalui google form" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSdn3tOMHIv-w5n1kJUpN-kKRlIPF1BYcebEdg97A0XjiApbyQ/viewform?pli=1">
-                <b>🧑🏻‍🎓 Mahasiswa Baru</b>
+                <i class="nav-icon fas fa-circle" style="font-size: 10px;"></i>
+                <p>Mahasiswa Baru</p>
               </a>
             </li>
-
             <!-- marketer -->
             <li class="nav-item">
               <a class="nav-link" title="Pendaftaran affiliate marketer melalui google form" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSeonJjeVBB7or82wdfwFF-DyjvfMkSAlaPCrEe5F0_3LSqYaA/viewform?usp=send_form">
-                <b>🧑🏻‍💻 Affiliate Marketer</b>
+                <i class="nav-icon fas fa-circle" style="font-size: 10px;"></i>
+                <p>Affiliate Marketer</p> 
               </a>
             </li>
-
             <!-- dosen -->
             <li class="nav-item">
               <a class="nav-link" title="Pendaftaran dosen melalui google form" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSd13nSYiRV5QwsdEgPXVh7OLBSOzy0X1iWpqz3yaz6o0g1r1g/closedform">
-                <b>🧑🏻‍🏫 Lowongan Dosen</b>
+                <i class="fas fa-circle nav-icon" style="font-size: 10px;"></i>
+                <p>Lowongan Dosen</p>
               </a>
             </li>
-
           </ul>
         </li>
         <!-- /.pendaftaran -->
@@ -116,24 +114,28 @@
                 
             <!-- flashdata -->
             <?php if ($this->session->flashdata('mahasiswa_saved')) : ?>
+            <br>
             <b class="text-lime">
               <i class="fas fa-check"></i> 
               <?= $this->session->flashdata('mahasiswa_saved') ?>
             </b>
 
             <?php elseif ($this->session->flashdata('mahasiswa_updated')) : ?>
+            <br>
             <b class="text-lime">
               <i class="fas fa-pen"></i>
               <?= $this->session->flashdata('mahasiswa_updated') ?>
             </b>
 
             <?php elseif ($this->session->flashdata('mahasiswa_deleted')) : ?>
+            <br>
             <b class="text-lime">
               <i class="fas fa-trash"></i>
               <?= $this->session->flashdata('mahasiswa_deleted') ?>
             </b>
 
             <?php elseif ($this->session->flashdata('mahasiswa_truncated')) : ?> 
+            <br>
             <b class="text-lime">
               <i class="fas fa-fire"></i> 
               <?= $this->session->flashdata('mahasiswa_truncated') ?>
@@ -174,24 +176,29 @@
 
             <!-- flashdata -->
             <?php if ($this->session->flashdata('post_saved')) : ?>
+            
+            <br>
             <b class="text-lime">
               <i class="fas fa-check"></i> 
               <?= $this->session->flashdata('post_saved') ?>
             </b>
 
             <?php elseif ($this->session->flashdata('post_updated')) : ?>
+            <br>
             <b class="text-lime">
               <i class="fas fa-pen"></i>
               <?= $this->session->flashdata('post_updated') ?>
             </b>
 
             <?php elseif ($this->session->flashdata('post_deleted')) : ?>
+            <br>
             <b class="text-lime">
               <i class="fas fa-trash"></i>
               <?= $this->session->flashdata('post_deleted') ?>
             </b>
 
             <?php elseif ($this->session->flashdata('post_truncated')) : ?> 
+            <br>
             <b class="text-lime">
               <i class="fas fa-fire"></i> 
               <?= $this->session->flashdata('post_truncated') ?>
@@ -259,11 +266,13 @@
             <p class="font-weight-bold">Feedbacks</p>
             <!-- flashdata -->
             <?php if ($this->session->flashdata('feedback_deleted')) : ?>
+            <br>
             <b class="text-lime">
               <i class="fas fa-trash"></i> 
               <?= $this->session->flashdata('feedback_deleted') ?>
             </b>
             <?php elseif ($this->session->flashdata('feedback_truncated')) : ?> 
+            <br>
             <b class="text-lime">
               <i class="fas fa-fire"></i> 
               <?= $this->session->flashdata('feedback_truncated') ?>

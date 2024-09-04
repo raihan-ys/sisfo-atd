@@ -21,18 +21,18 @@ $this->load->view('templates/background');
 
 				<!-- flashdata -->
 				<?php if ($this->session->flashdata('feedback_deleted')) : ?>
-				<div class="alert alert-dismissible fade show bg-success" role="alert" style="width: 320px">
+				<div class="alert alert-dismissible fade show bg-lime" id="alertDiv" style="width: 320px">
 					<b><?= $this->session->flashdata('feedback_deleted') ?></b> <i class="fas fa-trash"></i>
 					<?php $this->session->unset_userdata('feedback_deleted') ?>
-					<button type="button" class="close" data-dismiss="alert" aria-label="close">
+					<button type="button" class="close" id="closeAlert" aria-label="close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<?php elseif ($this->session->flashdata('feedback_truncated')) : ?>
-				<div class="alert alert-dismissible fade show bg-success" role="alert" style="width: 350px">
+				<div class="alert alert-dismissible fade show bg-lime" id="alertDiv" style="width: 350px">
 					<b><?= $this->session->flashdata('feedback_truncated') ?></b> <i class="fas fa-fire"></i>
 					<?php $this->session->unset_userdata('feedback_truncated') ?>
-					<button type="button" class="close" data-dismiss="alert" aria-label="close">
+					<button type="button" class="close" id="closeAlert" aria-label="close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
