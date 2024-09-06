@@ -199,11 +199,12 @@ class Mahasiswamodel extends CI_Model
 		$original_nim = $this->find($mahasiswa['id'])->nim;
 		if (!$original_nim) return;
 
-		// If the submitted nim is the same as the original nim.
-		if ($mahasiswa['nim'] == $original_nim) 
+		// Check if the submitted nim is the same as the original nim.
+		if ($mahasiswa['nim'] == $original_nim) {
 			return $this->db->update($this->table, $mahasiswa, ['id' => $mahasiswa['id']]);
+		}
 
-		// Find out if there's other mahasiswa with the same name.
+		// Find out if there's other mahasiswa with the same nim.
 		$nim_duplicated = $this->db
 			->where('nim', $mahasiswa['nim'])
 			->get($this->table)

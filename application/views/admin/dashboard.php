@@ -75,7 +75,7 @@ $this->load->view('templates/background');
 				<div class="row">
 					<!-- draft -->
 					<div class="small-box col-lg-2 col-4 m-3 card card-outline card-secondary bg-oldlace">
-						<a class="text-dark" href="<?= site_url('admin/akademik/post') ?>">
+						<a class="text-dark" href="<?= site_url('admin/akademik/post/?keyword=&status=Draft') ?>">
 							<div class="icon"><i class="fas fa-edit"></i></div>
 							<h3><?= $article_count['draft_count'] ?></h3>
 							<p class="h5">Articles<br><b>IN DRAFT</b></p>
@@ -84,7 +84,7 @@ $this->load->view('templates/background');
 
 					<!-- published -->
 					<div class="small-box col-lg-2 col-4 m-3 card card-outline card-info bg-oldlace">
-						<a class="text-dark" href="<?= site_url('admin/akademik/post') ?>">
+						<a class="text-dark" href="<?= site_url('admin/akademik/post/?keyword=&status=Published') ?>">
 							<div class="icon"><i class="fas fa-eye"></i></div>
 							<h3><?= $article_count['published_count'] ?></h3>
 							<p class="h5">Articles<br><b>PUBLISHED</b></p>

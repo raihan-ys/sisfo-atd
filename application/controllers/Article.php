@@ -1,4 +1,5 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Article extends CI_Controller 
@@ -24,17 +25,16 @@ class Article extends CI_Controller
 		];
 		$this->pagination->initialize($paging);
 
-		// rentang dan batasan menampilkan data.
 		$limit = $paging['per_page'];
 		$offset = html_escape($this->input->get('per_page', true));
 
-		// get user data.
+		// Get current user datas.
 		$data['current_user'] = $this->AuthModel->current_user();
 
-		// get articles.
+		// Get all articles.
 		$data['articles'] = $this->ArticleModel->get_published($limit, $offset);
 
-		// get submitted keyword.
+		// Get submitted keyword.
 		$keyword = $this->input->get('keyword', true) == null ? null : trim($this->input->get('keyword', true));
 		$data['keyword'] = $keyword;
 
@@ -42,10 +42,11 @@ class Article extends CI_Controller
 		$data['meta'] = ['title' => 'List Artikel'];
 
 		// search article, if the user submitted the search form.
-		if (!empty($data['keyword']))
-			$data['articles'] = $this->ArticleModel->search($data['keyword'] );
+		if (!empty($data['keyword'])) {
+			$data['articles'] = $this->ArticleModel->search($data['keyword']);
+		}
 
-		// show UI. 
+		// Load view.
 		$this->load->view(count($data['articles']) <= 0 ? 
 			'article/empty' : 'article/list', $data
 		);

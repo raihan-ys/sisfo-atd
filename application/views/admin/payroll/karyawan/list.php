@@ -27,25 +27,24 @@ $this->load->view('templates/background');
             <thead>
               <tr>
                 <td class="mhs-tb-header" colspan="10">
-
-                  <!-- add -->
-                  <a href="<?= base_url('admin/payroll/karyawan/add') ?>" class="btn btn-block btn-primary" role="button">
-                    <h3>Tambah Data +</h3>
-                  </a>
-
                   <!-- title -->
-                  <div title="This is the title" class="mhs-tb-title" align="center">
+                  <div title="This is the title" class="mhs-tb-title mb-3" align="center">
                     <i class="far fa-circle fas fa-users"></i> Daftar Karyawan
+                    <br>
+                    <!-- add -->
+                    <a href="<?= base_url('admin/payroll/karyawan/add') ?>" class="btn btn-small btn-primary p-1" role="button">
+                      <p class="h3">Tambah Data +</p>
+                    </a>
                   </div>
 
                   <div align="center">
 
                     <!-- flashdata -->
                     <?php if ($this->session->flashdata('karyawan_deleted')) : ?>
-                    <div class="alert alert-dismissible fade show bg-lime" role="alert" style="width: 350px">
+                    <div class="alert alert-dismissible fade show bg-lime" id="alertDiv" style="width: 350px">
                       <h4><?= $this->session->flashdata('karyawan_deleted') ?> <i class="fas fa-trash"></i></h4>
                       <?php $this->session->unset_userdata('karyawan_deleted') ?>
-                      <button title="close this notification" type="button" class="close" data-dismiss="alert" aria-label="close">
+                      <button title="close this notification" type="button" class="close" id="closeAlert" aria-label="close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
@@ -58,6 +57,17 @@ $this->load->view('templates/background');
                       <!-- input keyword -->
                       <label for="keyword">Pencarian Karyawan: </label>
                       <input type="search" title="Enter the keyword" class="input" name="keyword" placeholder="Masukkan NIK / Nama" value="<?= html_escape($keyword) ?>" maxlength="128" style="width: 230px">&nbsp&nbsp
+
+                      <!-- select kelamin -->
+                      <label for="kelamin">2. </label>
+                      <select title="Select gender" class="input" style="width: 230px" name="kelamin">
+                        <option value="" selected>Semua Jenis Kelamin</option>
+                        <?php foreach ($kelaminx as $klm) : ?>
+                        <option value="<?= $klm ?>" <?= set_select('kelamin', $klm, $klm == $kelamin ? TRUE : FALSE) ?>>
+                          <?= $klm ?>
+                        </option>
+                        <?php endforeach ?>
+                      </select>&nbsp&nbsp
 
                       <!-- submit -->
                       <button title="Activate search engine" value="search" type="submit" class="btn-submit" style="background-color: aquamarine">

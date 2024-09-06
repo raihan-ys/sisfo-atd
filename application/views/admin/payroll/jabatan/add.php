@@ -26,10 +26,10 @@ $this->load->view('templates/background');
 							<h2 class="mhs-input-header"><i class="far fa-circle fas fa-download"></i> Input Data Jabatan</h2>
 							<!-- flashdata -->
 							<?php if ($this->session->flashdata('jabatan_saved')) : ?>
-							<div class="alert alert-dismissible fade show bg-lime" role="alert" style="width: 380px">
+							<div class="alert alert-dismissible fade show bg-lime" id="alertDiv" style="width: 380px;">
 								<h4 align="center"><?= $this->session->flashdata('jabatan_saved') ?> 👍</h4>
 								<?php $this->session->unset_userdata('jabatan_saved') ?>
-								<button title="Close this notification" type="button" class="close" data-dismiss="alert" aria-label="close">
+								<button title="Close this notification" type="button" class="close" id="closeAlert" aria-label="close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>

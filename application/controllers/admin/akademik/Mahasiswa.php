@@ -53,8 +53,9 @@ class Mahasiswa extends CI_Controller
 		$data['program_studix'] = ['Manajemen Informatika', 'Sistem Informasi', 'Teknik Komputer'];
 
 		// search mahasiswa, if the user submitted the search form.
-		if (!empty($data['keyword']) || !empty($data['kelamin']) || !empty($data['program_studi']))
+		if (!empty($data['keyword']) || !empty($data['kelamin']) || !empty($data['program_studi'])) {
 			$data['mahasiswa'] = $this->MahasiswaModel->search($data['keyword'], $data['kelamin'], $data['program_studi']);
+		}
 
 		// show the UI.
 		$this->load->view(count($data['mahasiswa']) <= 0 ?

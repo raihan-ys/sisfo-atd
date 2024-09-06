@@ -14,7 +14,7 @@ $this->load->view('templates/background');
 		$this->load->view('templates/navbar'); 
 		?>
 
-		<div class="bg-transparent content-wrapper p-3">
+		<div class="bg-transparent content-wrapper p-3">	
 			<div class="container-fluid" style="max-width: 1000px">
 				<div class="card card-outline card-info article" style="background-color: oldlace">
 

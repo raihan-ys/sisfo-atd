@@ -76,7 +76,7 @@ class Post extends CI_Controller
 
 			// submitted form validation.
 			if (!$image || $this->form_validation->run() === false) {
-				if (!$image) $this->session->set_flashdata('file_not_set', 'You did not select a file to upload!');
+				if (!$image) $this->session->set_flashdata('file_not_set', 'Anda belum mengupload gambar!');
 				return $this->load->view('admin/akademik/post/add', $data);
 			}
 
@@ -125,49 +125,54 @@ class Post extends CI_Controller
 		$this->load->view('admin/akademik/post/add', $data);
 	}
 
-	// update post.
+	// Update the specified article.
 	public function edit($id = null)
 	{
-		// get article by id.
+		// Get specified article.
 		$data['article'] = $this->ArticleModel->find($id);
-		if(!$data['article'] || !$id) redirect('errors/page_not_found');
 
-		// set data to be used in view.
+		if(!$data['article'] || !$id) {
+			redirect('errors/page_not_found');
+		}
+
 		$data['current_user'] = $this->AuthModel->current_user();
+
 		$data['meta'] = ['title' => 'Posts'];
 
-		// if form is submitted.
+		// Get submitted data from the view.
 		if ($this->input->method() === 'post') {
-
-			// set the validation rules, then validate the submitted form and the submitted image.
+			// Get uploaded image
 			$image = $_FILES['image'];
+
+			// Validate the submitted data.
 			$this->form_validation->set_rules($this->ArticleModel->rules('edit'));
 			if (!$image || $this->form_validation->run() === false) {
-				if (!$image) $this->session->set_flashdata('file_not_set', 'You did not select a file to upload!');
+				if (!$image) {
+					$this->session->set_flashdata('file_not_set', 'Anda belum mengupload gambar!');
+				}
 				return $this->load->view('admin/akademik/post/edit', $data);
 			}
 
-			// image uploading config.
+			// Image upload config.
 			$upload_config = [
 				'upload_path' => FCPATH.'/uploads/article-image/',
 				'allowed_types' => 'gif|jpg|jpeg|png',
 				'file_name' => str_replace('.', '', $this->input->post('title', true)),
 				'overwrite' => true,
-				'max_size' => 1024, //<- in KB(Kilo bytes)
+				'max_size' => 1024,
 				'max_height' => 1480,
 				'max_width' => 1480
 			];
 			$this->load->library('upload', $upload_config);
 
-			// upload the image.
+			// Save the uploaded image.
 			if (!$this->upload->do_upload('image')) {
 				$data['image_error'] = $this->upload->display_errors('<p class="text-danger font-weight-bold">', '</p>');
 				return $this->load->view('admin/akademik/post/edit', $data);
 			}
-			
 			$uploaded_data = $this->upload->data();
 			
-			// Submitted data and the uploaded image data.
+			// Update the specified article in database.
 			$article = [
 				'id' => $id,
 				'title' => $this->input->post('title', true),
@@ -177,24 +182,23 @@ class Post extends CI_Controller
 				'draft' => $this->input->post('draft', true),
 				'updated_at' => date("Y-m-d H:i:s")
 			];
-
-			// Update data.
 			$updated = $this->ArticleModel->update($article);
 			
-			if ($updated === true) :
-				$this->session->set_flashdata('post_updated', 'Article updated!');
+			if ($updated === true) {
+				$this->session->set_flashdata('post_updated', 'Article diupdate!');
 				redirect('admin/akademik/post');
-			elseif ($updated === 'title_duplicated') :	
+			}
+			elseif ($updated === 'title_duplicated') {
 				$this->session->set_flashdata('title_duplicated', 'Judul ini sudah terpakai!');
-			else :
+			}
+			else {
 				redirect('errors/something_wrong');
-			endif;
+			}
 		}
-		// if form is not submitted yet
 		$this->load->view('admin/akademik/post/edit', $data);
 	}
 
-	// delete post.
+	// Delete the specified article.
 	public function delete($id = null)
 	{
 		// if id is not supplied.

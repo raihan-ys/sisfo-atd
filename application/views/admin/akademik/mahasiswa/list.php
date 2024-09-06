@@ -10,8 +10,10 @@ $this->load->view('templates/background');
   
   <div class="wrapper">
 
-    <?php $this->load->view('templates/sidebar'); ?>
-    <?php $this->load->view('templates/navbar'); ?>
+    <?php
+    $this->load->view('templates/sidebar');
+    $this->load->view('templates/navbar');
+    ?>
 
     <!-- Content Wrapper -->
     <div class="bg-transparent content-wrapper p-3">

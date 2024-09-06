@@ -119,11 +119,7 @@ class Jabatan extends CI_Controller
 			}
 			elseif ($updated === 'kode_duplicated') {
 				$this->session->set_flashdata('kode_duplicated', 'Kode jabatan ini sudah tersimpan!');
-			}
-			elseif ($updated === 'nama_duplicated') {
-				$this->session->set_flashdata('nama_duplicated', 'Nama jabatan ini sudah tersimpan!');
-			}
-			else {
+			} else {
 				redirect('errors/something_wrong');
 			}
 		}

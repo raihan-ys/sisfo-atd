@@ -29,10 +29,10 @@ $this->load->view('templates/background');
 							
 						<!-- flashdata -->
 						<?php if ($this->session->flashdata('jabatan_updated')) : ?>
-						<div align="center" class="alert alert-dismissible fade show bg-lime" role="alert" style="width: 380px">
+						<div align="center" class="alert alert-dismissible fade show bg-lime" id="alertDiv" style="width: 380px">
 						<h4><?= $this->session->flashdata('jabatan_updated') ?> 👍</h4>
 						<?php $this->session->unset_userdata('jabatan_updated') ?>
-						<button title="close this notification" type="button" class="close" data-dismiss="alert" aria-label="close">
+						<button title="close this notification" type="button" class="close" id="closeAlert" aria-label="close">
 						<span aria-hidden="true">&times;</span>
 						</button>
 						</div>

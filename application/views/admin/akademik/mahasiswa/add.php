@@ -9,8 +9,10 @@ $this->load->view('templates/background');
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
-		<?php $this->load->view('templates/sidebar'); ?>
-		<?php $this->load->view('templates/navbar'); ?>
+		<?php 
+		$this->load->view('templates/sidebar');
+	  $this->load->view('templates/navbar');
+		?>
 
 		<div class="bg-transparent content-wrapper p-3">
 			<div class="container-fluid">

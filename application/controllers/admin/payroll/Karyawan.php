@@ -16,10 +16,10 @@ class Karyawan extends CI_Controller
 		$this->load->library('form_validation');
 	}
 
-	// show karyawan.
+	// Display all employees.
 	public function index() 
 	{
-		// pagination config.
+		// Pagination config.
 		$this->load->library('pagination');
 		$paging = [
 			'base_url' => site_url('admin/payroll/karyawan'),
@@ -31,27 +31,31 @@ class Karyawan extends CI_Controller
 		];
 		$this->pagination->initialize($paging);
 
-		// rentang dan batasan menampilkan data.
+		// Set limit.
 		$limit = $paging['per_page'];
 		$offset = html_escape($this->input->get('per_page', true));
 
-		// get user data.
+		// Get current user data.
 		$data['current_user'] = $this->AuthModel->current_user();
 
-		// get karyawan data.
-		$data['karyawan'] = $this->KaryawanModel->get($limit, $offset);
-
+		// Get submitted keyword
 		$keyword = $this->input->get('keyword', true) == null ? null : trim($this->input->get('keyword', true));
 		$data['keyword'] = $keyword;
+		$data['kelamin'] = $this->input->get('kelamin', true);
 
-		// set title.
+		// Set options to select in <select> element.
+		$data['kelaminx'] = ['Laki-laki', 'Perempuan'];
+
+		// Get all employees.
+		if (!empty($data['keyword'] || !empty($data['kelamin']))) {
+			$data['karyawan'] = $this->KaryawanModel->search($data['keyword'], $data['kelamin']);
+		} else {
+			$data['karyawan'] = $this->KaryawanModel->get($limit, $offset);
+		}
+
+		// Set title.
 		$data['meta'] = ['title' => 'Karyawan'];
 
-		// search karyawan, if the user submitted the search form.
-		if (!empty($data['keyword']))
-			$data['karyawan'] = $this->KaryawanModel->search($data['keyword']);
-
-		// show the UI.
 		$this->load->view(count($data['karyawan']) <= 0 ?
 			'admin/payroll/karyawan/empty' :
 			'admin/payroll/karyawan/list', $data
@@ -89,28 +93,30 @@ class Karyawan extends CI_Controller
 		$this->load->view('admin/payroll/karyawan/add.php', $data);
 	}
 
-	// update karyawan.
+	// Update the specified employee.
 	public function edit($id) 
 	{
 		$data['karyawan'] = $this->KaryawanModel->find($id);
-		if (!$id || !$data['karyawan']) redirect('errors/page_not_found');
+		if (!$id || !$data['karyawan']) {
+			redirect('errors/page_not_found');
+		}
 
-		// set data to be viewed to the page.
+		// Get current user data.
 		$data['current_user'] = $this->AuthModel->current_user();
 		$data['meta'] = ['title' => 'Karyawan'];
 
-		// if the form is submitted.
 		if ($this->input->method() === 'post') {
 
-			// submitted form validation.
+			// Validate the submitted form.
 			$this->form_validation->set_rules($this->KaryawanModel->rules('edit'));
-			if($this->form_validation->run() === FALSE) return $this->load->view('admin/payroll/jabatan/edit', $data);
+			if($this->form_validation->run() === FALSE) {
+				return $this->load->view('admin/payroll/jabatan/edit', $data);
+			}
 
-			// submitted data.
-			$jabatan = [
+			$karyawan = [
 				'id' => $id,
 				'nik' => $this->input->post('nik', true),
-				'nama' => $this->input->post('nama', true),
+				'nama' =>	 $this->input->post('nama', true),
 				'tpt_lahir' => $this->input->post('tpt_lahir', true),
 				'tgl_lahir' => $this->input->post('tgl_lahir', true),
 				'kelamin' => $this->input->post('kelamin', true),
@@ -119,12 +125,12 @@ class Karyawan extends CI_Controller
 			];
 
 			// is the record updated.
-			$updated = $this->KaryawanModel->update($jabatan);
+			$updated = $this->KaryawanModel->update($karyawan);
 
-			if ($updated == true) {
+			if ($updated === true) {
 				$this->session->set_flashdata('karyawan_updated', 'Data diubah!');
 			}
-			elseif ($updated == 'nik_duplicated') {
+			elseif ($updated === 'nik_duplicated') {
 				$this->session->set_flashdata('nik_duplicated', 'NIK Karyawan ini sudah tersimpan!');
 			}
 			elseif ($updated == false) {

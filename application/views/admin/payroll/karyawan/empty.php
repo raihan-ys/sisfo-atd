@@ -34,21 +34,21 @@ $this->load->view('templates/background');
 
                   <div align="center">
 
-                  <!-- flashdata -->
+                    <!-- flashdata -->
                     <?php if ($this->session->flashdata('karyawan_deleted')) : ?>
-                    <div class="alert alert-dismissible fade show bg-lime" role="alert" style="width: 380px">
+                    <div class="alert alert-dismissible fade show bg-lime" id="alertDiv"" style="width: 380px">
                       <h4><?= $this->session->flashdata('karyawan_deleted') ?> <i class="fas fa-trash"></i></h4>
                       <?php $this->session->unset_userdata('karyawan_deleted') ?>
-                      <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                      <button type="button" class="close" id="closeAlert" aria-label="close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
 
                     <?php elseif ($this->session->flashdata('karyawan_truncated')) : ?>
-                    <div class="alert alert-dismissible fade show bg-lime" role="alert" style="width: 500px">
+                    <div class="alert alert-dismissible fade show bg-lime" id="alertDiv" style="width: 500px">
                       <h4><?= $this->session->flashdata('karyawan_truncated') ?> <i class="fas fa-fire"></i></h4>
                       <?php $this->session->unset_userdata('karyawan_truncated') ?>
-                      <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                      <button type="button" class="close" data-dismiss="alert" id="closeAlert" aria-label="close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
@@ -61,6 +61,17 @@ $this->load->view('templates/background');
                       <!-- input keyword -->
                       <label for="keyword">Pencarian Karyawan: </label>
                       <input class="input" style="width: 230px" title="Enter the keyword" type="search" name="keyword" placeholder="Masukkan NIK/Nama Karyawan" value="<?= html_escape($keyword) ?>">&nbsp&nbsp
+
+                      <!-- select kelamin -->
+                      <label for="kelamin">2. </label>
+                      <select title="Select gender" class="input" style="width: 230px" name="kelamin">
+                        <option value="" selected>Semua Jenis Kelamin</option>
+                        <?php foreach ($kelaminx as $klm) : ?>
+                        <option value="<?= $klm ?>" <?= set_select('kelamin', $klm, $klm == $kelamin ? TRUE : FALSE) ?>>
+                          <?= $klm ?>
+                        </option>
+                        <?php endforeach ?>
+                      </select>&nbsp&nbsp
 
                       <!-- btn submit -->
                       <button title="Search engine, activated!" type="submit" class="btn-submit" style="background-color: aquamarine">

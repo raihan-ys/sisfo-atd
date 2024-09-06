@@ -112,9 +112,11 @@ class ArticleModel extends CI_Model
 		// $keyword = value, $status = value
 		if (!empty($keyword) && !empty($status)) {
 			$this->db
-				->where('draft', $status === 'Draft' ? 'true' : 'false')
-				->like('title', $keyword)
-				->or_like('content', $keyword);
+				->group_start()
+					->like('title', $keyword)
+					->or_like('content', $keyword)
+				->group_end()
+				->where('draft', $status === 'Draft' ? 'true' : 'false');
 		}
 		// $keyword = value, $status = empty
 		elseif (!empty($keyword) && empty($status)) {
@@ -140,25 +142,29 @@ class ArticleModel extends CI_Model
 		return $this->db->insert($this->table, $article);
 	}
 
-	// Edit article.
+	// Update the specified article.
 	public function update($article = null) 
 	{
-		// If there's no article's id, then stop function execution.
-		if (!$article['id']) return;
+		if (!$article['id']) {
+			return;
+		}
 
 		// Get the original article's title.
-		$original_title = $this->find($article['id'])->title;
-		if (!$original_title) return;
+		$title = strtolower($this->find($article['id'])->title);
 
 		// If the submitted title is the same as the original title, then continue update this article.
-		if ($article['title'] === $original_title) return $this->db->update($this->table, $article, ['id' => $article['id']]);
+		if (strtolower($article['title']) === $title) {
+			return $this->db->update($this->table, $article, ['id' => $article['id']]);
+		}
 
 		// Find out if there's other article with the same title.
 		$title_duplicated = $this->db
 			->where('title', $article['title'])
 			->get($this->table)
 			->row();
-		if ($title_duplicated) return 'title_duplicated';
+		if ($title_duplicated) {
+			return 'title_duplicated';
+		}
 
 		return $this->db->update($this->table, $article, ['id' => $article['id']]);
 	}

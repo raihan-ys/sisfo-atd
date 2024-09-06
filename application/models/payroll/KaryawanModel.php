@@ -11,7 +11,7 @@ class KaryawanModel extends CI_Model
 	{
 		// Select other database in the same connection.
 		$this->db->db_select('atd_payroll');
-
+ 
 		if ($intent === 'add') {
 			$nik_rules = [
 				'field' => 'nik',
@@ -113,14 +113,33 @@ class KaryawanModel extends CI_Model
 	}
 
 	// Search karyawan.
-	public function search($keyword) 
+	public function search($keyword, $kelamin) 
 	{
 		// Select other database in the same connection.
 		$this->db->db_select('atd_payroll');
 
+		// keyword = value, kelamin = empty
+		if (!empty($keyword) && empty($kelamin)) {
+			$this->db
+				->like('nik', $keyword)
+				->or_like('nama', $keyword);
+		}
+		// keyword = value, kelamin = value
+		elseif (!empty($keyword) && !empty($kelamin)) {
+			$this->db
+				->group_start()
+					->like('nik', $keyword)
+					->or_like('nama', $keyword)
+				->group_end()
+				->where('kelamin', $kelamin);
+		}
+		// keyword = empty, kelamin = value
+		elseif (empty($keyword) && !empty($kelamin)) {
+			$this->db
+				->where('kelamin', $kelamin);
+		}
+
 		return $this->db
-			->like('nik', $keyword)
-			->or_like('nama', $keyword)
 			->order_by('nik', 'ASC')
 			->get($this->table)
 			->result();
@@ -159,26 +178,23 @@ class KaryawanModel extends CI_Model
 		return $this->db->insert($this->table, $karyawan);
 	}
 
-	// Edit karyawan.
+	// Update the specified employee.
 	public function update($karyawan) 
 	{
-		if (!$karyawan['id']) return;
+		if (!$karyawan['id']) {
+			return;
+		}
 
 		// Select other database in the same connection.
 		$this->db->db_select('atd_payroll');
 
 		// Get the original nik of this karyawan.
 		$original_nik = $this->find($karyawan['id'])->nik;
+		if(!$original_nik) return;
 
-		// If the submitted nik are the same as the submitted data, then continue updating.
-		if ($karyawan['nik'] === $original_nik) {
-
-			// Does the updating proccess succesful?
-			if ($this->db->update($this->table, $karyawan, ['id' => $karyawan['id']])) {
-				return true;
-			} else {
-				return false;
-			}
+		// Check if the submitted nik is the same as the original nik.
+		if ($karyawan['nik'] == $original_nik) {
+			return $this->db->update($this->table, $karyawan, ['id' => $karyawan['id']]);
 		}
 		
 		// Find out if there's other karyawan with the same nik.
@@ -188,12 +204,7 @@ class KaryawanModel extends CI_Model
 			->row();
 		if ($nik_duplicated) return 'nik_duplicated';
 
-		// Does the updating proccess succesful?
-		if ($this->db->update($this->table, $karyawan, ['id' => $karyawan['id']])) {
-			return true;
-		} else {
-			return false;
-		}
+		return $this->db->update($this->table, $karyawan, ['id' => $karyawan['id']]);
 	}
 
 	// Delete karyawan.

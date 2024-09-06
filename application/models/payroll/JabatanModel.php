@@ -141,27 +141,21 @@ class JabatanModel extends CI_Model
 		$this->db->db_select('atd_payroll');
 
 		// Get the orginal kode and nama jabatan attribute.
-		$original_kode = $this->find($jabatan['id'])->kode_jabatan;
-		$original_nama = $this->find($jabatan['id'])->nama_jabatan;
+		$original_kode = strtolower($this->find($jabatan['id'])->kode_jabatan);
 
 		// If the submitted kode and nama are the same as the submitted data, then continue updating.
-		if ( ($jabatan['kode_jabatan'] === $original_kode || $jabatan['nama_jabatan'] === $original_nama) 
-			|| ($jabatan['kode_jabatan'] === $original_kode && $jabatan['nama_jabatan'] === $original_nama) )
+		if (strtolower($jabatan['kode_jabatan']) === $original_kode) {
 			return $this->db->update($this->table, $jabatan, ['id' => $jabatan['id']]);
+		}
 
 		// Find out if there's other jabatan with the same kode.
 		$kode_duplicated = $this->db
 			->where('kode_jabatan', $jabatan['kode_jabatan'])
 			->get($this->table)
 			->row();
-		if ($kode_duplicated) return 'kode_duplicated';
-
-		// Find out if there's other jabatan with the same nama.
-		$nama_duplicated = $this->db
-			->where('nama_jabatan', $jabatan['nama_jabatan'])
-			->get($this->table)
-			->row();
-		if ($nama_duplicated) return 'nama_duplicated';
+		if ($kode_duplicated) {
+			return 'kode_duplicated';
+		}
 
 		return $this->db->update($this->table, $jabatan, ['id' => $jabatan['id']]);
 	}

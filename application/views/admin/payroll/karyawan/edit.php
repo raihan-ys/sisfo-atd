@@ -29,10 +29,10 @@ $this->load->view('templates/background');
 							
 							<!-- flashdata -->
 							<?php if ($this->session->flashdata('karyawan_updated')) : ?>
-							<div align="center" class="alert alert-dismissible fade show bg-lime" role="alert" style="width: 380px">
+							<div align="center" class="alert alert-dismissible fade show bg-lime" id="alertDiv" style="width: 380px">
 								<h4><?= $this->session->flashdata('karyawan_updated') ?> 👍</h4>
 								<?php $this->session->unset_userdata('karyawan_updated') ?>
-								<button title="close this notification" type="button" class="close" data-dismiss="alert" aria-label="close">
+								<button title="close this notification" type="button" class="close" id="closeAlert" aria-label="close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
@@ -52,12 +52,12 @@ $this->load->view('templates/background');
 								<input class="<?= form_error('nik') || $this->session->flashdata('nik_duplicated') ? 'input-invalid' : 'input' ?>" type="text" name="nik" id="nik" placeholder="Maks. 10 digit (tidak kurang dari '0')" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="<?= set_value('nik', $karyawan->nik) ?>" required>
 								<?= form_error('nik', '<div class="text-tomato font-weight-bold">', '</div>') ?>
 
-								<!-- if the submitted NIK is alredy taken... -->
+								<!-- if the submitted NIK is alredy taken -->
 								<?php if ($this->session->flashdata('nik_duplicated')) : ?>
 								<br>
 								<div class="text-tomato font-weight-bold">
 									<?= $this->session->flashdata('nik_duplicated') ?>
-									<?php $this->session->unset_userdata('nik_duplicated') ?>
+									<!-- <?php $this->session->unset_userdata('nik_duplicated') ?> -->
 								</div>
 								<?php endif ?>
 							</td>
