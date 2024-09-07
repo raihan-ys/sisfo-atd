@@ -20,21 +20,21 @@ $this->load->view('templates/background');
 
 					<!-- header -->
 					<tr>
-						<td colspan="2">
+						<th scope="col" colspan="2">
 							<img class="mhs-input-img mb-2 mx-auto d-block" src="<?= base_url('assets/images/laptop-input.png') ?>">
-							<h2 class="mhs-input-header p-1 text-center d-block"><i class="far fa-circle fas fa-download"></i> Input Data Mahasiswa</h2>
+							<h2 class="mhs-input-header p-1 mx-auto text-center d-block"><i class="far fa-circle fas fa-download"></i> Input Data Mahasiswa</h2>
 							
 							<!-- flashdata -->
 							<?php if ($this->session->flashdata('mahasiswa_saved')) : ?>
 							<div class="alert alert-dismissible fade show bg-lime mx-auto d-block" id="alertDiv" style="width: 380px">
-								<h4 align="center"><?= $this->session->flashdata('mahasiswa_saved') ?> 👍</h4>
+								<h4 class="text-center"><?= $this->session->flashdata('mahasiswa_saved') ?> 👍</h4>
 								<?php $this->session->unset_userdata('mahasiswa_saved') ?>
 								<button type="button" id="closeAlert" class="close" aria-label="close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
 							<?php endif ?>
-						</td>
+						</th>
 					</tr>
 					<!-- /.header -->
 

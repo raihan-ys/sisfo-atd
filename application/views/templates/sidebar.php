@@ -252,7 +252,7 @@
             <!-- Penggajian -->
             <li class="nav-item">
               <a class="nav-link" title="Payroll" href="<?= site_url('admin/payroll/gaji') ?>">
-                <p>💸 Penggajian (Coming soon)</p>
+                <p>💸 Penggajian</p>
               </a>
             </li>
           </ul>

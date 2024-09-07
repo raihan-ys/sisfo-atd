@@ -13,7 +13,10 @@ class Dashboard extends CI_Controller
 		$this->load->model([
 			'akademik/MahasiswaModel', 
 			'akademik/ArticleModel', 
-			'akademik/FeedbackModel'
+			'akademik/FeedbackModel',
+			'payroll/JabatanModel',
+			'payroll/KaryawanModel',
+			'payroll/GajiModel',
 		]);
 
 		$data['mahasiswa_count'] = [
@@ -28,6 +31,11 @@ class Dashboard extends CI_Controller
 		];
 
 		$data['feedback_count'] = $this->FeedbackModel->count();
+		$data['jabatan_count'] = $this->JabatanModel->count();
+		$data['karyawan_count'] = $this->KaryawanModel->count();
+
+		$data['gaji_count'] = $this->GajiModel->count();
+
 
 		$data['meta'] = ['title' => 'Dashboard'];
 		$this->load->view('admin/dashboard', $data);

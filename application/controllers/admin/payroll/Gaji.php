@@ -6,9 +6,8 @@ class Gaji extends CI_Controller
 	public function __construct() 
 	{
 		parent:: __construct();
-		$this->load->model(['akademik/AuthModel', 'payroll/GajiModel']);
+		$this->load->model(['akademik/AuthModel', 'payroll/GajiModel', 'payroll/KaryawanModel', 'payroll/JabatanModel']);
 		
-		// does the user has access?
 		if (!$this->AuthModel->current_user()) redirect('auth/login');
 
 		$this->load->helper('form');
@@ -45,7 +44,7 @@ class Gaji extends CI_Controller
 		$data['keyword'] = $keyword;
 
 		// set title.
-		$data['meta'] = ['title' => 'Gaji'];
+		$data['meta'] = ['title' => 'Penggajian'];
 
 		// search gaji, if the user submitted the search form.
 		if (!empty($data['keyword']))
@@ -62,7 +61,11 @@ class Gaji extends CI_Controller
 	public function add() 
 	{
 		$data['current_user'] = $this->AuthModel->current_user();
-		$data['meta'] = ['title' => 'Gaji'];
+		$data['meta'] = ['title' => 'Penggajian'];
+
+		// Get all karyawan and jabatan.
+		$data['karyawan'] = $this->KaryawanModel->get();
+		$data['jabatan'] = $this->JabatanModel->get();
 
 		// if the form is submitted
 		if ($this->input->method() === 'post') {
@@ -100,7 +103,7 @@ class Gaji extends CI_Controller
 
 		// set data to be viewed to the page.
 		$data['current_user'] = $this->AuthModel->current_user();
-		$data['meta'] = ['title' => 'gaji'];
+		$data['meta'] = ['title' => 'Penggajian'];
 
 		// if the form is submitted.
 		if ($this->input->method() === 'post') {

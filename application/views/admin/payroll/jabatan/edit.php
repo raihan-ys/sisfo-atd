@@ -17,27 +17,25 @@ $this->load->view('templates/background');
 
 		<div class="bg-transparent content-wrapper p-3">
       <div class="container-fluid">
-			  <table align="center" border="0" cellspacing="10" cellpadding="15">
+			  <table class="mx-auto" cellspacing="10" cellpadding="15">
 
 			  <!-- header -->
 				<tr>
-					<td colspan="2" align="center">
-					  <img class="mhs-input-img" src="<?= base_url('assets/images/laptop-input.png') ?>"><br><br>
-
-						<!-- title -->	
-						<h2 class="mhs-input-header"><i class="fas fa-pen"></i> Ubah Data Jabatan</h2>
+					<th scope="col" colspan="2">
+					  <img class="mhs-input-img mb-2 d-block mx-auto" src="<?= base_url('assets/images/laptop-input.png') ?>">
+						<h2 class="mhs-input-header p-1 d-block mx-auto text-center"><i class="fas fa-pen"></i> Ubah Data Jabatan</h2>
 							
 						<!-- flashdata -->
 						<?php if ($this->session->flashdata('jabatan_updated')) : ?>
-						<div align="center" class="alert alert-dismissible fade show bg-lime" id="alertDiv" style="width: 380px">
-						<h4><?= $this->session->flashdata('jabatan_updated') ?> 👍</h4>
+						<div class="alert alert-dismissible fade show bg-lime" id="alertDiv" style="width: 380px">
+						<h4 class="text-center"><?= $this->session->flashdata('jabatan_updated') ?> 👍</h4>
 						<?php $this->session->unset_userdata('jabatan_updated') ?>
 						<button title="close this notification" type="button" class="close" id="closeAlert" aria-label="close">
 						<span aria-hidden="true">&times;</span>
 						</button>
 						</div>
 						<?php endif ?>
-					</td>
+					</th>
 				</tr>
 				<!-- /.header -->
 

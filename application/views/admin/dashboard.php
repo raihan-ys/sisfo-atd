@@ -108,7 +108,41 @@ $this->load->view('templates/background');
 						</a>
 					</div>
 				</div><br>
-				<!-- article row -->
+				<!-- /.article row -->
+
+				<hr class="bg-white">
+
+				<!-- payroll row -->
+				<h1 class="text-white"><i class="fas fa-database"></i> Resources</h1>
+				<div class="row">
+					<!-- jabatan -->
+					<div class="small-box col-lg-2 col-4 m-3 card card-outline card-secondary bg-oldlace">
+						<a class="text-dark" href="<?= site_url('admin/payroll/jabatan') ?>">
+							<div class="icon"><i class="fas fa-laptop"></i></div>
+							<h3><?= $jabatan_count ?></h3>
+							<h4>Total Jabatan</h4>
+						</a>
+					</div>
+
+					<!-- karyawan -->
+					<div class="small-box col-lg-2 col-4 m-3 card card-outline card-info bg-oldlace">
+						<a class="text-dark" href="<?= site_url('admin/payroll/karyawan') ?>">
+							<div class="icon"><i class="fas fa-user-circle"></i></div>
+							<h3><?= $karyawan_count ?></h3>
+							<h5>Total Karyawan</h5>
+						</a>
+					</div>
+
+					<!-- gaji --->
+					<div class="small-box col-lg-2 col-4 m-3 card card-outline card-success bg-oldlace">
+						<a class="text-dark" href="<?= site_url('admin/payroll/gaji') ?>">
+							<div class="icon"><i class="fas fa-database"></i></div>
+							<h3><?= $gaji_count ?></h3>
+							<h5>Data Penggajian</h5>
+						</a>
+					</div>
+				</div><br>
+				<!-- /.payroll row -->
 
 				<!-- feedback row-->
 				<div class="row">

@@ -47,25 +47,24 @@ $this->load->view('templates/background');
 
 		<div class="bg-transparent content-wrapper p-3">
 			<div class="container-fluid">
-				<table align="center" border="0" cellspacing="10" cellpadding="15">
+				<table class="mx-auto" cellspacing="10" cellpadding="15">
 
 					<!-- header -->
 					<tr>
-						<td colspan="2" align="center">
-							<img class="mhs-input-img" src="<?= base_url('assets/images/laptop-input.png') ?>"><br><br>	
-							<!-- title -->
-							<h2 class="mhs-input-header"><i class="far fa-circle fas fa-pencil"></i> Ubah Data Penggajian</h2>
+						<th scope="col" colspan="2">
+							<img class="mhs-input-img d-block mx-auto" src="<?= base_url('assets/images/laptop-input.png') ?>"><br><br>	
+							<h2 class="mhs-input-header d-block text-center"><i class="far fa-circle fas fa-pencil"></i> Ubah Data Penggajian</h2>
 							<!-- flashdata -->
 							<?php if ($this->session->flashdata('gaji_saved')) : ?>
 							<div class="alert alert-dismissible fade show bg-lime" role="alert" style="width: 380px">
-								<h4 align="center"><?= $this->session->flashdata('gaji_saved') ?> 👍</h4>
+								<h4 class="text-center"><?= $this->session->flashdata('gaji_saved') ?> 👍</h4>
 								<?php $this->session->unset_userdata('gaji_saved') ?>
 								<button title="Close this notification" type="button" class="close" data-dismiss="alert" aria-label="close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
 							<?php endif ?>
-						</td>
+						</th>
 					</tr>
 					<!-- /.header -->
 								 
