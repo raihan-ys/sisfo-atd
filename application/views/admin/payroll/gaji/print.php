@@ -1,134 +1,65 @@
-<?php 
-error_reporting(0);
-require '../../config/koneksi.php';
-$id = $_GET['id'];
-
-// query select MySQL untuk mendapatkan data dari tabel kode jabatan dan kode karyawan(dengan inner join?)
-$selectQuery = mysqli_query($koneksi, "SELECT * FROM tb_gaji a INNER JOIN tb_jabatan b ON a.kode_jabatan = b.kode_jabatan INNER JOIN tb_karyawan c ON a.kode_karyawan = c.kode_karyawan WHERE a.id = $id");
-
-// mendapatkan data spesifik dari hasil query diatas
-$result = mysqli_fetch_assoc($selectQuery);
-?>
-			
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title> &nbsp </title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slip Gaji - <?= $gaji->no_gaji ?></title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .container { width: 80%; margin: 0 auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
+  </style>
 </head>
-
-<!-- onload="window.print();" ==> maksudnya, akan membuka halaman/webpage yang memersiapkan operasi untuk mencetak -->
-<body onload="window.print();" 
-style="font-family: sans-serif;">
-<br>
-	<!-- table -->
-	<table align="center" border="0" cellpadding="5">
-		<!-- ul input -->
-		<ul>
-
-			<!-- header -->
-			<tr>
-				<th bgcolor="honeydew" colspan="2" align="center">
-					<h3>** Slip Pembayaran Gaji Karyawan **</h3>
-				</th>
-			</tr>
-			<!-- /.header -->
-
-			<!-- Profil Karyawan -->
-			<!-- nama karyawan -->
-			<tr>
-				<td><li>Nama Karyawan</li></td>
-				<td>
-					: &nbsp
-					<b><?php echo $result['nama_karyawan']; ?></b>
-				</td>
-			</tr>
-			<!-- /.nama karyawan -->
-
-			<!-- nama jabatan -->
-			<tr>
-				<td><li>Jabatan</li></td>
-				<td>
-					: &nbsp
-					<b><?php echo $result['nama_jabatan']; ?></b>
-				</td>
-			</tr>
-			<!-- /.nama jabatan -->
-
-			<!-- Rincian Penggajian -->
-			<!-- header 2nd -->
-			<tr>
-				<th align="center" colspan="2">
-					<br>
-					Rincian Gaji Karyawan
-				</th>
-			</tr>
-			<!-- /.header 2 -->
-			
-			<!-- gaji pokok -->
-			<tr>
-				<td><li>Gaji Pokok</li></td>
-				<td>
-					: &nbsp
-					<?php echo "Rp. ".number_format($result['gaji_pokok'], 2); ?>
-				</td>
-			</tr>
-			<!-- /.gaji pokok -->
-
-			<!-- tunjangan transportasi -->
-			<tr>
-				<td><li>Tunjangan Transportasi</li></td>
-				<td>: &nbsp
-					<?php echo "Rp. ".number_format($result['tjgn_transportasi'], 2); ?>	
-				</td>
-			</tr>
-			<!-- /.tunjangan transportasi -->
-
-			<!-- tunjangan beras -->
-			<tr>
-				<td><li>Tunjangan Beras</li></td>
-				<td>: &nbsp
-					<?php echo "Rp. ".number_format($result['tjgn_beras'], 2); ?>
-				</td>
-			</tr>
-			<!-- /.tunjangan beras -->
-
-			<!-- potongan keterlamabatan -->
-			<tr>
-				<td><li>Potongan Keterlambatan</li></td>
-				<td>: &nbsp
-					<?php echo "Rp. ".number_format($result['ptgn_trlmbt'], 2); ?>
-				</td>
-			</tr>
-			<!-- /.potongan keterlambatan -->
-
-			<!-- potongan absen -->
-			<tr>
-				<td><li>Potongan Absen</li></td>
-				<td>: &nbsp
-					<?php echo "Rp. ".number_format($result['ptgn_absen'], 2) ?>
-				</td>
-			</tr>
-			<!-- /.potongan absen -->
-
-			<!-- bonus -->
-			<tr>
-				<td><li>Bonus</li></td>
-				<td>: &nbsp
-					<?php echo "Rp. ".number_format($result['bonus'], 2); ?>
-				</td>
-			</tr>
-			<!-- /.bonus -->
-
-			<!-- gaji bersih -->
-			<tr>
-				<td>GAJI BERSIH</td>
-				<td>
-					: &nbsp
-					<?php echo "<b>Rp. ".number_format($result['gaji_bersih'], 2)."</b>"; ?>
-				</td>
-			</tr>
-			<!-- /.gaji bersih -->
-	</table>
-	<!-- table -->
+<body>
+  <div class="container">
+    <h1>Slip Gaji</h1>
+    <table>
+      <tr>
+        <th>No. Gaji</th>
+        <td><?= $gaji->no_gaji ?></td>
+      </tr>
+      <tr>
+        <th>Tanggal Gaji</th>
+        <td><?= $gaji->tgl_gaji ?></td>
+      </tr>
+      <tr>
+        <th>NIK</th>
+        <td><?= $gaji->nik ?></td>
+      </tr>
+      <tr>
+        <th>Kode Jabatan</th>
+        <td><?= $gaji->kode_jabatan ?></td>
+      </tr>
+      <tr>
+        <th>Gaji Pokok</th>
+        <td>Rp <?= number_format($gaji->gaji_pokok, 0, ',', '.') ?></td>
+      </tr>
+      <tr>
+        <th>Tunjangan Beras</th>
+        <td>Rp <?= number_format($gaji->tunjangan_beras, 0, ',', '.') ?></td>
+      </tr>
+      <tr>
+        <th>Potongan Terlambat</th>
+        <td>Rp <?= number_format($gaji->potongan_telat, 0, ',', '.') ?></td>
+      </tr>
+      <tr>
+        <th>Potongan Absen</th>
+        <td>Rp <?= number_format($gaji->potongan_absen, 0, ',', '.') ?></td>
+      </tr>
+      <tr>
+        <th>Bonus</th>
+        <td>Rp <?= number_format($gaji->bonus, 0, ',', '.') ?></td>
+      </tr>
+      <tr>
+        <th>Gaji Bersih</th>
+        <td>Rp <?= number_format($gaji->gaji_bersih, 0, ',', '.') ?></td>
+      </tr>
+    </table>
+  </div>
+  <script>
+    window.print();
+  </script>
 </body>
 </html>

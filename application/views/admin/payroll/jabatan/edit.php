@@ -27,7 +27,7 @@ $this->load->view('templates/background');
 							
 						<!-- flashdata -->
 						<?php if ($this->session->flashdata('jabatan_updated')) : ?>
-						<div class="alert alert-dismissible fade show bg-lime" id="alertDiv" style="width: 380px">
+						<div class="mx-auto alert alert-dismissible fade show bg-lime" id="alertDiv" style="width: 380px">
 						<h4 class="text-center"><?= $this->session->flashdata('jabatan_updated') ?> 👍</h4>
 						<?php $this->session->unset_userdata('jabatan_updated') ?>
 						<button title="close this notification" type="button" class="close" id="closeAlert" aria-label="close">

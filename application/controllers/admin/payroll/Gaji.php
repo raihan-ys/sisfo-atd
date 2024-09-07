@@ -72,7 +72,9 @@ class Gaji extends CI_Controller
 
 			// set the form rules and validation
 			$this->form_validation->set_rules($this->GajiModel->rules('add'));
-			if ($this->form_validation->run() === FALSE) return $this->load->view('admin/payroll/gaji/add', $data);
+			if ($this->form_validation->run() === false) {
+				return $this->load->view('admin/payroll/gaji/add', $data);
+			}
 
 			// data yang akan di input
 			$gaji = [
@@ -104,6 +106,10 @@ class Gaji extends CI_Controller
 		// set data to be viewed to the page.
 		$data['current_user'] = $this->AuthModel->current_user();
 		$data['meta'] = ['title' => 'Penggajian'];
+
+		// Get all karyawan and jabatan.
+		$data['karyawan'] = $this->KaryawanModel->get();
+		$data['jabatan'] = $this->JabatanModel->get();
 
 		// if the form is submitted.
 		if ($this->input->method() === 'post') {
@@ -164,5 +170,18 @@ class Gaji extends CI_Controller
 
 		$this->session->set_flashdata('gaji_truncated', 'Seluruh data dihapus!');
 	 	redirect('admin/payroll/gaji');
+	}
+
+	// Print gaji.
+	public function print($id) 
+	{
+		$data['gaji'] = $this->GajiModel->find($id);
+		if (!$id || !$data['gaji']) redirect('errors/page_not_found');
+
+		$data['current_user'] = $this->AuthModel->current_user();
+		$data['meta'] = ['title' => 'Cetak Slip Gaji'];
+
+		// Load view untuk mencetak
+		$this->load->view('admin/payroll/gaji/print', $data);
 	}
 }

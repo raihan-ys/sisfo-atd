@@ -26,27 +26,24 @@ $this->load->view('templates/background');
             <thead>
               <tr>
                 <td class="mhs-tb-header" colspan="12">
-
-                  <!-- add -->
-                  <a href="<?= base_url('admin/payroll/gaji/add') ?>" class="btn btn-block btn-primary" role="button">
-                    <h3>Tambah Data +</h3>
-                  </a>
-
-                  <br>
-
                   <!-- title -->
-                  <div title="This is the title" class="mhs-tb-title" align="center">
+                  <div title="This is the title" class="mhs-tb-title mb-3" align="center">
                     <i class="far fa-circle fas fa-users"></i> Daftar Gaji
+                    <br>
+                    <!-- add -->
+                    <a href="<?= base_url('admin/payroll/gaji/add') ?>" class="btn btn-small btn-primary" role="button">
+                      <p class="h3">Tambah Data +</p>
+                    </a>
                   </div>
 
                   <div align="center">
 
                     <!-- flashdata -->
                     <?php if ($this->session->flashdata('gaji_deleted')) : ?>
-                    <div class="alert alert-dismissible fade show bg-lime" role="alert" style="width: 350px">
+                    <div class="alert alert-dismissible fade show bg-lime" id="alertDiv" style="width: 350px">
                       <h4><?= $this->session->flashdata('gaji_deleted') ?> <i class="fas fa-trash"></i></h4>
                       <?php $this->session->unset_userdata('gaji_deleted') ?>
-                      <button title="close this notification" type="button" class="close" data-dismiss="alert" aria-label="close">
+                      <button title="close this notification" type="button" class="close" id="closeAlert" aria-label="close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
@@ -117,9 +114,10 @@ $this->load->view('templates/background');
                       Hapus<img class="mhs-img-delete" src="<?= base_url('assets/images/cross-red.png') ?>">
                     </Button>
                   </a>
-									<a href="<?= base_url('admin/payroll/gaji/print/'. $gj->id) ?>"></a>
-										<Button>
+									<a href="<?= base_url('admin/payroll/gaji/print/'. $gj->id) ?>">
+										<Button class="btn btn-rounded btn-warning m-1">
 											Cetak
+                      <i class="fas fa-print"></i>
 										</Button>
 									</a>		
                 </td>

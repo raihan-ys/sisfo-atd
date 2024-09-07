@@ -3,7 +3,7 @@
 
 <?php 
 $this->load->view('templates/head');
-$this->load->view('templates/background_video');
+$this->load->view('templates/background');
 ?>
 
 

@@ -23,11 +23,11 @@ $this->load->view('templates/background');
 						<tr>
 							<th scope="col" colspan="2">
 								<img class="mhs-input-img mb-2 mx-auto d-block" src="<?= base_url('assets/images/laptop-input.png') ?>">
-								<h2 class="mhs-input-header p-1 text-center d-block"><i class="far fa-circle fas fa-download"></i> Input Data Penggajian</h2>
+								<h2 class="mhs-input-header p-1 text-center mx-auto d-block"><i class="far fa-circle fas fa-download"></i> Input Data Penggajian</h2>
 								
 								<!-- flashdata -->
 								<?php if ($this->session->flashdata('gaji_saved')) : ?>
-								<div class="alert alert-dismissible fade show bg-lime" id="alertDiv" style="width: 380px">
+								<div class="alert alert-dismissible fade show bg-lime mx-auto" id="alertDiv" style="width: 380px">
 									<h4 class="text-center"><?= $this->session->flashdata('gaji_saved') ?> 👍</h4>
 									<?php $this->session->unset_userdata('gaji_saved') ?>
 									<button type="button" class="close" id="closeAlert" aria-label="close">
@@ -86,7 +86,7 @@ $this->load->view('templates/background');
 
 							<!-- kode jabatan -->
 							<tr>
-								<td class="mhs-td-label"><li class="mhs-label">Kode Jabatan</li></td>
+								<th scope="row" class="mhs-td-label"><li class="mhs-label">Kode Jabatan</li></td>
 								<td>
 									<b class="mhs-label">: &nbsp</b>
 									<select class="<?= form_error('kode_jabatan') ? 'input-invalid' : 'input' ?>" name="kode_jabatan" id="kode_jabatan" onchange="changeValue(this.value)" required>
@@ -126,7 +126,7 @@ $this->load->view('templates/background');
 
 							<!-- gaji_pokok -->
 							<tr>
-								<td class="mhs-td-label"><li class="mhs-label">Gaji Pokok</li></td>
+								<th scope="row" class="mhs-td-label"><li class="mhs-label">Gaji Pokok</li></td>
 								<td>
 									<b class="mhs-label">: &nbsp</b>
 									<input type="number" class="<?= form_error('gaji_pokok') ? 'input-invalid' : 'input' ?>" style="background: wheat" name="gaji_pokok" id="gaji_pokok" value="<?= set_value('gaji_pokok') ?>" required readonly>
@@ -146,7 +146,7 @@ $this->load->view('templates/background');
 
 							<!-- potongan_telat -->
 							<tr>
-								<td class="mhs-td-label"><li class="mhs-label">Potongan Telat</li></td>
+								<th scope="row" class="mhs-td-label"><li class="mhs-label">Potongan Telat</li></td>
 								<td>
 									<b class="mhs-label">: &nbsp</b>
 									<input type="number" class="<?= form_error('potongan_telat') ? 'input-invalid' : 'input' ?>" name="potongan_telat" id="potongan_telat" oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="<?= set_value('potongan_telat', 0) ?>" required>
@@ -156,7 +156,7 @@ $this->load->view('templates/background');
 						
 							<!-- potongan_absen -->
 							<tr>
-								<td class="mhs-td-label"><li class="mhs-label">Potongan Absen</li></td>
+								<th scope="row" class="mhs-td-label"><li class="mhs-label">Potongan Absen</li></td>
 								<td>
 									<b class="mhs-label">: &nbsp</b>
 									<input type="number" class="<?= form_error('potongan_absen') ? 'input-invalid' : 'input' ?>" name="potongan_absen" id="potongan_absen" oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="<?= set_value('potongan_absen', 0) ?>" required>
@@ -166,7 +166,7 @@ $this->load->view('templates/background');
 						
 							<!-- bonus -->
 							<tr>
-								<td class="mhs-td-label"><li class="mhs-label">Bonus</li></td>
+								<th scope="row" class="mhs-td-label"><li class="mhs-label">Bonus</li></td>
 								<td>
 									<b class="mhs-label">: &nbsp</b>
 									<input type="tel" class="<?= form_error('bonus') ? 'input-invalid' : 'input' ?>" name="bonus" id="bonus" placeholder="Maks. 10 digit" maxlength="15" oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="<?= set_value('bonus', 0) ?>" required>
@@ -177,15 +177,15 @@ $this->load->view('templates/background');
 							<!-- count total salary -->
 							<tr>
 								<td colspan="2">
-									<button type="button" class="btn btn-success btn-block" id="countButton">
-										<h5>Count</h5>
+									<button type="button" class="btn bg-lime btn-block" id="countButton">
+										<h5>Hitung Gaji</h5>
 									</button>
 								</td>
 							</tr>
 
 							<!-- gaji_bersih -->
 							<tr>
-								<td class="mhs-td-label"><li class="mhs-label">Gaji Bersih</li></td>
+								<th scope="row" class="mhs-td-label"><li class="mhs-label">Gaji Bersih</li></td>
 								<td>
 									<b class="mhs-label">: &nbsp</b>
 									<input type="tel" class="<?= form_error('gaji_bersih') ? 'input-invalid' : 'input' ?>" name="gaji_bersih" id="gaji_bersih" placeholder="Maks. 10 digit" maxlength="15" oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="<?= set_value('gaji_bersih') ?>" required readonly>
@@ -227,34 +227,31 @@ $this->load->view('templates/background');
 			const countButton = $("#countButton");
 			const resetButton = $("#resetButton");
 
-			let no_gaji = $("#no_gaji");
-			let tgl_gaji = $("#tgl_gaji");
-			let nik = $("#nik");
-			let kode_jabatan = $("#kode_jabatan");
-			let gaji_pokok = $("#gaji_pokok");
-			let tunjangan_beras = $("#tunjangan_beras");
-			let potongan_telat = $("#potongan_telat");
-			let potongan_absen = $("#potongan_absen");
-			let bonus = $("#bonus");
-			let gaji_bersih = $("#gaji_bersih");
-
 			// Count total salary.
 			countButton.click(function() {
-				gaji_bersih.value = (gaji_pokok + tunjangan_beras) - potongan_telat - potongan_absen + bonus;
+				let gaji_pokok = parseFloat($("#gaji_pokok").val()) || 0;
+				let tunjangan_beras = parseFloat($("#tunjangan_beras").val()) || 0;
+				let potongan_telat = parseFloat($("#potongan_telat").val()) || 0;
+				let potongan_absen = parseFloat($("#potongan_absen").val()) || 0;
+				let bonus = parseFloat($("#bonus").val()) || 0;
+
+				let gaji_bersih = gaji_pokok + tunjangan_beras - potongan_telat - potongan_absen + bonus;
+				
+				$("#gaji_bersih").val(gaji_bersih);
 			});
 
 			// Reset all fields.
 			resetButton.click(function() {
-				no_gaji.value = '';
-				tgl_gaji.value = '';
-				nik.value.value = '';
-				kode_jabatan.value.value = '';
-				gaji_pokok.value.value = 0;
-				tunjangan_beras.value = 0;
-				potongan_absen.value = 0;
-				bonus.value = 0;
-				bonus.value = 0;
-				gaji_bersih.value = 0;
+				$("#no_gaji").val('');
+				$("#tgl_gaji").val('');
+				$("#nik").val('');
+				$("#kode_jabatan").val('');
+				$("#gaji_pokok").val('0');
+				$("#tunjangan_beras").val('0');
+				$("#potongan_telat").val('0');
+				$("#potongan_absen").val('0');
+				$("#bonus").val('0');
+				$("#gaji_bersih").val('0');
 			});
 		});
 	</script>

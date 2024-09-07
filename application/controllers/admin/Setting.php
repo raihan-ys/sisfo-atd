@@ -8,8 +8,8 @@ class Setting extends CI_Controller
 	{
 		parent::__construct();
 
-		$this->load->model('akademik/auth_model');
-		if (!$this->auth_model->current_user()) {
+		$this->load->model('akademik/AuthModel');
+		if (!$this->AuthModel->current_user()) {
 			redirect('auth/login');
 		}
 	}
@@ -17,11 +17,12 @@ class Setting extends CI_Controller
 	// Show setting.
 	public function index()
 	{
-		$data['current_user'] = $this->auth_model->current_user();
+		$data['current_user'] = $this->AuthModel->current_user();
 		$data['meta'] = ['title' => 'Settings'];
 		$this->load->view('admin/setting', $data);
 	}
 
+	/*
 	// crop the image file.
 	public function _crop($image_data)
 	{
@@ -145,22 +146,23 @@ class Setting extends CI_Controller
 		// watermark the image.
 		return $this->image_lib->watermark();
 	}
+	*/
 
 	// Upload avatar.
 	public function avatar_upload()
 	{
 		// Models.
-		$this->load->model('akademik/profile_model');
+		$this->load->model('akademik/ProfileModel');
 		// Services.
 		$this->load->library('form_validation');
 
-		$data['current_user'] = $this->auth_model->current_user();
+		$data['current_user'] = $this->AuthModel->current_user();
 
 		// Get post.
 		if ($this->input->method() === 'post') {
 			$upload = [
-				'upload_path' => FCPATH.'/uploads/user_avatar/',
-				'upload_url' => base_url('uploads/user_avatar/'),
+				'upload_path' => FCPATH.'/uploads/user-avatar/',
+				'upload_url' => base_url('uploads/user-avatar/'),
 				'allowed_types' => 'gif|jpg|jpeg|png',
 				'file_name' => str_replace('.', '', $data['current_user']->id),
 				'overwrite' => true,
@@ -182,12 +184,12 @@ class Setting extends CI_Controller
 			];
 
 			// Update avatar in database.
-			if (!$this->profile_model->update($new_data)) {
+			if (!$this->ProfileModel->update($new_data)) {
 				redirect('errors/something_wrong');
 			}
 			$this->session->set_flashdata('message', 'Avatar Updated!');
 
-			
+			/*			
 			switch ($this->input->post('action', TRUE)) {
 				case 'crop':
 					if (!$this->_crop($uploaded_data)) {
@@ -217,6 +219,7 @@ class Setting extends CI_Controller
 					redirect('admin/setting');
 				break;
 			}
+			*/
 			redirect('admin/setting');
 		}
 		$data['meta'] = ['title' => 'Upload Avatar'];
@@ -226,13 +229,8 @@ class Setting extends CI_Controller
 	// remove user's avatar.
 	public function avatar_remove()
 	{
-		$this->load->model('akademik/profile_model');
-		/* *
-		 * because we won't load a view/interface to show, 
-		 * then we can make the user's data not to be 
-		 * keeped in an array like '$data[]'.
-		 * */
-		$current_user = $this->auth_model->current_user();
+		$this->load->model('akademik/ProfileModel');
+		$current_user = $this->AuthModel->current_user();
 
 		// delete file.
 		// php unlink(): menghapus file, sesuai directory/path yang diisi pada argumen/param.
@@ -246,7 +244,7 @@ class Setting extends CI_Controller
 		];
 
 		// remove avatar.
-		if (!$this->profile_model->update($new_data)) redirect('errors/something_wrong');
+		if (!$this->ProfileModel->update($new_data)) redirect('errors/something_wrong');
 		$this->session->set_flashdata('avatar_deleted', 'Avatar removed!');
 		redirect('admin/setting');
 	}
@@ -256,15 +254,15 @@ class Setting extends CI_Controller
 	{
 		$this->load->library('form_validation');
 	
-		$data['current_user'] = $this->auth_model->current_user();
+		$data['current_user'] = $this->AuthModel->current_user();
 		$data['meta'] = ['title' => 'Edit Profile'];
 
 		// if the form is submitted.
 		if ($this->input->method() === 'post') {
-			$this->load->model('akademik/profile_model');
+			$this->load->model('akademik/ProfileModel');
 
 			// validate the submitted form.
-			$this->form_validation->set_rules($this->profile_model->profile_rules());
+			$this->form_validation->set_rules($this->ProfileModel->profile_rules());
 			if ($this->form_validation->run() == false) return $this->load->view('admin/profile_edit', $data);
 
 			// submitted data.
@@ -275,7 +273,7 @@ class Setting extends CI_Controller
 			];
 
 			// update user's profile.
-			if (!$this->profile_model->update($profile)) redirect('errors/something_wrong');
+			if (!$this->ProfileModel->update($profile)) redirect('errors/something_wrong');
 
 			$this->session->set_flashdata('message', 'Profile updated!');
 			redirect('admin/setting');
@@ -288,7 +286,7 @@ class Setting extends CI_Controller
 	{
 		$this->load->library('form_validation');
 
-		$data['current_user'] = $this->auth_model->current_user();
+		$data['current_user'] = $this->AuthModel->current_user();
 		$data['meta'] = ['title' => 'Verifikasi Password'];
 
 		if ($this->input->method() === 'post') {
@@ -313,14 +311,14 @@ class Setting extends CI_Controller
 	{
 		$this->load->library('form_validation');
 
-		$data['current_user'] = $this->auth_model->current_user();
+		$data['current_user'] = $this->AuthModel->current_user();
 		$data['meta'] = ['title' => 'Change Password'];
 
 		if ($this->input->method() === 'post') {
 
 			// submitted form validation.
-			$this->load->model('akademik/profile_model');
-			$this->form_validation->set_rules($this->profile_model->password_rules());
+			$this->load->model('akademik/ProfileModel');
+			$this->form_validation->set_rules($this->ProfileModel->password_rules());
 			if ($this->form_validation->run() === false) return $this->load->view('admin/password_edit', $data);
 
 			// submitted data.
@@ -331,7 +329,7 @@ class Setting extends CI_Controller
 	    	];
 
 			// updates user's password.
-			if (!$this->profile_model->update($password)) redirect('errors/something_wrong'); //<- terjadi kesalahan
+			if (!$this->ProfileModel->update($password)) redirect('errors/something_wrong'); //<- terjadi kesalahan
 
 			$this->session->set_flashdata('message', 'Password changed!');
 			redirect('admin/setting');

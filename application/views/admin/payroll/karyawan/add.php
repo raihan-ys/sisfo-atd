@@ -25,7 +25,7 @@ $this->load->view('templates/background');
 							<h2 class="mhs-input-header mx-auto p-1 d-block text-center"><i class="far fa-circle fas fa-download"></i> Input Data Karyawan</h2>
 							<!-- flashdata -->
 							<?php if ($this->session->flashdata('karyawan_saved')) : ?>
-							<div class="alert alert-dismissible fade show bg-lime" id="alertDiv" style="width: 380px">
+							<div class="alert alert-dismissible fade show bg-lime mx-auto" id="alertDiv" style="width: 380px">
 								<h4 align="center"><?= $this->session->flashdata('karyawan_saved') ?> 👍</h4>
 								<?php $this->session->unset_userdata('karyawan_saved') ?>
 								<button title="Close this notification" id="closeAlert" type="button" class="close" aria-label="close">

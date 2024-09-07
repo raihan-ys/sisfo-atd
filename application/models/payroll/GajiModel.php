@@ -143,24 +143,13 @@ class GajiModel extends CI_Model
 	}
 
 	// Search gaji.
-	public function search($keyword, $kode_jabatan) 
+	public function search($keyword) 
 	{
 		// Select other database in the same connection.
 		$this->db->db_select('atd_payroll');
 
-		// $keyword = value, $jabatan = value
-		if (!empty($keyword) && !empty($jabatan)) {
-			$this->db
-				->like('no_gaji', $keyword)
-				->or_like('nik', $keyword)
-				->where('kode_jabatan', $kode_jabatan);
-		}  
-		// $keyword = empty, $jabatan = value
-		if (empty($keyword) && !empty($jabatan)) {
-			$this->db
-				->where('kode_jabatan', $kode_jabatan);
-		}  
 		return $this->db
+			->where('no_gaji', $keyword)
 			->order_by('no_gaji', 'ASC')
 			->get($this->table)
 			->result();

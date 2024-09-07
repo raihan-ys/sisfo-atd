@@ -246,7 +246,8 @@
             <!-- karyawan -->
             <li class="nav-item">
               <a class="nav-link" title="Data SDM" href="<?= site_url('admin/payroll/karyawan') ?>">
-                <p>🧑🏻‍💼 Karyawan</p>
+                <i class="nav-icon text-white fas fa-user-circle"></i>
+                <p>Karyawan</p>
               </a>
             </li>
             <!-- Penggajian -->
