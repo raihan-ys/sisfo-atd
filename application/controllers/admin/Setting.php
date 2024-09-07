@@ -22,132 +22,6 @@ class Setting extends CI_Controller
 		$this->load->view('admin/setting', $data);
 	}
 
-	/*
-	// crop the image file.
-	public function _crop($image_data)
-	{
-		// if there's no image data, then stop this function.
-		if (!$image_data['full_path']) redirect('errors/page-not-found');
-
-		// crop config.
-		$image_path = $image_data['full_path'];
-
-		$config = [
-			'image_library' => 'gd2',
-			'source_image' => $image_path,
-			'maintain_ratio' => false,
-			'quality' => '100%',
-			'x_axis' => $this->input->post('x_axis', true),
-			'y_axis' => $this->input->post('y_axis', true),
-			'new_image' => $image_path
-		];
-
-		// initialize the image manipulation library with the configuration.
-		$this->load->library('image_lib');
-
-		$this->image_lib->initialize($config);
-		
-		$this->image_lib->clear();
-
-		// crop the image.
-		return $this->image_lib->crop();
-	}
-
-	// resize the image file.
-	public function _resize($image_data)
-	{
-		// if there's no image data, then stop this function.
-		if (!$image_data['full_path']) redirect('errors/page-not-found');
-
-		// resize config.
-		$image_path = $image_data['full_path'];
-
-		$config = [
-			'image_library' => 'gd2',
-			'source_image' => $image_path,
-			'maintain_ratio' => TRUE,
-			'quality' => '100%',
-			'height' => $this->input->post('height'),
-			'width' => $this->input->post('width'),
-			'new_image' => $image_path
-		];
-
-		// initialize the image manipulation library with the configuration.
-		$this->load->library('image_lib');
-
-		$this->image_lib->initialize($config);
-		
-		$this->image_lib->clear();
-
-		// resize the image.
-		return $this->image_lib->resize();
-	}
-
-	// rotate the image file.
-	public function _rotate($image_data)
-	{
-		// if there's no image data, then stop this function.
-		if (!$image_data['full_path']) redirect('errors/something_wrong');
-		
-		// rotate config.
-		$image_path = $image_data['full_path'];
-		$config = [
-			'image_library' => 'gd2',
-			'source_image' => $image_path,
-			'maintain_ratio' => TRUE,
-			'quality' => '100%',
-			'rotation_angle' => $this->input->post('rotation_angle', true),
-			'new_image' => $image_path
-		];
-
-		// initialize the image manipulation library with the configuration.
-		$this->load->library('image_lib');
-
-		$this->image_lib->initialize($config);
-		
-		$this->image_lib->clear();
-
-		// rotate the image.
-		return $this->image_lib->rotate();
-	}
-
-	// watermark the image.
-	public function _watermark($image_data)
-	{
-		// if there's no image data, then stop this function.
-		if (!$image_data['full_path']) redirect('errors/something_wrong');
-
-		// watermark config.
-		$image_path = $image_data['full_path'];
-		$config = [
-			'image_library' => 'gd2',
-			'source_image' => $image_path,
-			'wm_type' => 'text',
-			'wm_text' => $this->input->post('wm_text'),
-			'wm_font_size' => $this->input->post('wm_font_size'),
-			'wm_font_color' => '808080',
-			'wm_font_path' => FCPATH.'/system/fonts/texb.ttf',
-			'wm_hor_alignment' => 'bottom',
-			'wm_vrt_alignment' => 'right',
-			'wm_padding' => 1,
-			'wm_shadow_color' => '000000',
-			'wm_shadow_distance' => 1,
-			'quality' => '100%',
-			'new_image' => $image_path
-		];
-
-		// initialize the image manipulation library with the configuration.
-		$this->load->library('image_lib');
-
-		$this->image_lib->initialize($config);
-		
-		$this->image_lib->clear();
-
-		// watermark the image.
-		return $this->image_lib->watermark();
-	}
-	*/
-
 	// Upload avatar.
 	public function avatar_upload()
 	{
@@ -157,6 +31,7 @@ class Setting extends CI_Controller
 		$this->load->library('form_validation');
 
 		$data['current_user'] = $this->AuthModel->current_user();
+		$data['meta'] = ['title' => 'Upload Avatar'];
 
 		// Get post.
 		if ($this->input->method() === 'post') {
@@ -189,40 +64,8 @@ class Setting extends CI_Controller
 			}
 			$this->session->set_flashdata('message', 'Avatar Updated!');
 
-			/*			
-			switch ($this->input->post('action', TRUE)) {
-				case 'crop':
-					if (!$this->_crop($uploaded_data)) {
-						$data['action_error'] =  $this->image_lib->display_errors('<p class="text-danger font-weight-bold">', '</p>');
-						return $this->load->view('admin/avatar_upload', $data);
-					}
-					break;
-				case 'resize':
-					if (!$this->_resize($uploaded_data)) {
-						$data['action_error'] = $this->image_lib->display_errors('<p class="text-danger font-weight-bold">', '</p>');
-						return $this->load->view('admin/avatar_upload', $data);
-					}
-					break;
-				case 'rotate':
-					if (!$this->_rotate($uploaded_data)) {
-						$data['action_error'] = $this->image_lib->display_errors('<p class="text-danger font-weight-bold">', '</p>');
-						return $this->load->view('admin/avatar_upload', $data);
-					}
-					break;
-				case 'watermark':
-					if (!$this->_watermark($uploaded_data)) {
-						$data['action_error'] = $this->image_lib->display_errors('<p class="text-danger font-weight-bold">', '</p>');
-						return $this->load->view('admin/avatar_upload', $data);
-					}
-					break;
-				default :
-					redirect('admin/setting');
-				break;
-			}
-			*/
 			redirect('admin/setting');
 		}
-		$data['meta'] = ['title' => 'Upload Avatar'];
 		$this->load->view('admin/avatar_upload', $data);
 	}
 
@@ -232,8 +75,6 @@ class Setting extends CI_Controller
 		$this->load->model('akademik/ProfileModel');
 		$current_user = $this->AuthModel->current_user();
 
-		// delete file.
-		// php unlink(): menghapus file, sesuai directory/path yang diisi pada argumen/param.
 		$file_name = str_replace('.', '', $current_user->id);
 		array_map('unlink', glob(FCPATH."/uploads/user_avatar/$file_name.*"));
 

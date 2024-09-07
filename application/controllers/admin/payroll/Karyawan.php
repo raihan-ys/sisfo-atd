@@ -110,7 +110,7 @@ class Karyawan extends CI_Controller
 			// Validate the submitted form.
 			$this->form_validation->set_rules($this->KaryawanModel->rules('edit'));
 			if($this->form_validation->run() === FALSE) {
-				return $this->load->view('admin/payroll/jabatan/edit', $data);
+				return $this->load->view('admin/payroll/karyawan/edit', $data);
 			}
 
 			$karyawan = [

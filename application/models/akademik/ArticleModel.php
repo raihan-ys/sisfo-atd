@@ -107,7 +107,7 @@ class ArticleModel extends CI_Model
 	}
 
 	// Search article by keyword and status.
-	public function search($keyword, $status)
+	public function search($keyword = null, $status = null)
 	{
 		// $keyword = value, $status = value
 		if (!empty($keyword) && !empty($status)) {

@@ -25,10 +25,10 @@ $this->load->view('templates/background');
 							<h2 class="mhs-input-header d-block mx-auto text-center"><i class="fas fa-edit"></i> Ubah Data Penggajian</h2>
 							<!-- flashdata -->
 							<?php if ($this->session->flashdata('gaji_updated')) : ?>
-							<div class="alert alert-dismissible fade show bg-lime mx-auto" role="alert" style="width: 380px">
+							<div class="alert alert-dismissible fade show bg-lime mx-auto" id="alertDiv" style="width: 380px">
 								<h4 class="text-center"><?= $this->session->flashdata('gaji_updated') ?> 👍</h4>
 								<?php $this->session->unset_userdata('gaji_updated') ?>
-								<button title="Close this notification" type="button" class="close" data-dismiss="alert" aria-label="close">
+								<button title="Close this notification" type="button" class="close" id="closeAlert" aria-label="close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
@@ -44,8 +44,16 @@ $this->load->view('templates/background');
 								<th scope="row" class="mhs-td-label"><li class="mhs-label">No. Gaji</li></td>
 								<td>
 									<b class="mhs-label">: &nbsp</b>
-									<input type="text" class="<?= form_error('no_gaji') ? 'input-invalid' : 'input' ?>" name="no_gaji" id="no_gaji" placeholder="Maks. 10 karakter" maxlength="10" value="<?= set_value('no_gaji', $gaji->no_gaji) ?>" required>
+									<input type="text" class="<?= form_error('no_gaji') || $this->session->flashdata('no_duplicated') ? 'input-invalid' : 'input' ?>" name="no_gaji" id="no_gaji" placeholder="Maks. 10 karakter" maxlength="10" value="<?= set_value('no_gaji', $gaji->no_gaji) ?>" required>
 									<?= form_error('no_gaji', '<div class="text-tomato font-weight-bold">', '</div>') ?>
+									<!-- if the submitted no_gaji is alredy taken -->
+									<?php if ($this->session->flashdata('no_duplicated')) : ?>
+									<br>
+									<div class="text-tomato font-weight-bold">
+										<?= $this->session->flashdata('no_duplicated') ?>
+										<!-- <?php $this->session->unset_userdata('no_duplicated') ?> -->
+									</div>
+									<?php endif ?>
 								</td>
 							</tr>
 

@@ -28,7 +28,7 @@ $this->load->view('templates/background');
 								<!-- flashdata -->
 								<?php if ($this->session->flashdata('mahasiswa_updated')) : ?>
 								<div class="alert alert-dismissible fade show bg-lime mx-auto d-block" id="alertDiv" style="width: 380px">
-									<h4><?= $this->session->flashdata('mahasiswa_updated') ?> 👍</h4>
+									<h4 class="text-center "><?= $this->session->flashdata('mahasiswa_updated') ?> 👍</h4>
 									<?php $this->session->unset_userdata('mahasiswa_updated') ?>
 									<button id="closeAlert" type="button" class="close" aria-label="close">
 										<span aria-hidden="true">&times;</span>

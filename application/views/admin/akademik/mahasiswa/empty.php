@@ -46,7 +46,7 @@ $this->load->view('templates/background');
 
                     <?php elseif ($this->session->flashdata('mahasiswa_truncated')) : ?>
                     <div class="alert alert-dismissible fade show bg-lime" id="alertDiv" style="width: 500px">
-                      <h4><?= $this->session->flashdata('mahasiswa_truncated') ?> <i class="fas fa-fire"></i></h4>
+                      <h4 class="text-center"><?= $this->session->flashdata('mahasiswa_truncated') ?> <i class="fas fa-fire"></i></h4>
                       <?php $this->session->unset_userdata('mahasiswa_truncated') ?>
                       <button type="button" class="close" id="closeAlert" aria-label="close">
                         <span aria-hidden="true">&times;</span>

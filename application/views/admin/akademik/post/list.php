@@ -95,102 +95,104 @@ $this->load->view('templates/background');
 					<!-- /.search -->
 
 					<!-- body -->
-					<table class="table card-body">
+					<div class="card-body table-responsive">
+						<table class="table">
 
-						<thead>
-							<tr>
-								<th bgcolor="skyblue" style="width: 5%">No.</th>
-								<th class="bg-lime text-center">Judul</th>
-								<th class="bg-lime text-center" style="width: 15%">Status</th>
-								<th class="bg-lime text-center" style="width: 20%">Penulis</th>
-								<th bgcolor="skyblue" class="text-center" style="width: 20%">Aksi</th>
-							</tr>
-						</thead>
+							<thead>
+								<tr>
+									<th bgcolor="skyblue" style="width: 5%">No.</th>
+									<th class="bg-lime text-center">Judul</th>
+									<th class="bg-lime text-center" style="width: 15%">Status</th>
+									<th class="bg-lime text-center" style="width: 20%">Penulis</th>
+									<th bgcolor="skyblue" class="text-center" style="width: 20%">Aksi</th>
+								</tr>
+							</thead>
 
-						<tbody>
-							<?php
-							$i = 1; // <-index number
-							foreach ($articles as $article) : 
-							?>
-							<tr>
+							<tbody>
+								<?php
+								$i = 1; // <-index number
+								foreach ($articles as $article) : 
+								?>
+								<tr>
 
-								<!-- index -->
-								<td class="text-center font-weight-bold" style="vertical-align: middle" bgcolor="skyblue">
-									<?= $i++.'.'; ?>
-								</td>
-								
-								<!-- content -->
-								<td style="padding-left: 50px;vertical-align: middle">
-									<!-- image -->
-									<div>
-										<img class="article-image-preview" style="max-height: 180px; max-width: 180px" 
-										src="<?= $article->image ? base_url('uploads/article-image/'.$article->image) : base_url('assets/images/atd-logo.png') ?>" alt="<?= $article->title ?>">
-									</div>
-
+									<!-- index -->
+									<td class="text-center font-weight-bold" style="vertical-align: middle" bgcolor="skyblue">
+										<?= $i++.'.'; ?>
+									</td>
+									
 									<!-- content -->
-									<div class="font-weight-bold text-info h4"><?= $article->title ?></div>
-									<div class="text-dark">
-										<?= strlen($article->content) > 200 ? substr($article->content, 0, 200).'...' : $article->content ?>
-									</div>
+									<td style="padding-left: 50px;vertical-align: middle">
+										<!-- image -->
+										<div>
+											<img class="article-image-preview" style="max-height: 180px; max-width: 180px" 
+											src="<?= $article->image ? base_url('uploads/article-image/'.$article->image) : base_url('assets/images/atd-logo.png') ?>" alt="<?= $article->title ?>">
+										</div>
 
-									<!-- created at and updated at -->
-									<div class="text-secondary">
-										<small>
-											Created at <?= $article->created_at ?>
-											<?php if ($article->updated_at) : ?>
-											| Updated at <?= $article->updated_at ?>
-											<?php endif ?>
-										</small>
-									</div>
-								</td>
+										<!-- content -->
+										<div class="font-weight-bold text-info h4"><?= $article->title ?></div>
+										<div class="text-dark">
+											<?= strlen($article->content) > 50 ? substr($article->content, 0, 50).'...' : $article->content ?>
+										</div>
 
-								<!-- status -->
-								<td bgcolor="papayawhip" align="center" style="vertical-align: middle">
-									<font class="<?= $article->draft === 'true' ? 'text-secondary' : 'text-success' ?> font-weight-bold" size="4">
-										<?= $article->draft === 'true' ? 'Draft' : 'Published' ?>
-									</font>
-								</td>
+										<!-- created at and updated at -->
+										<div class="text-secondary">
+											<small>
+												Created at <?= $article->created_at ?>
+												<?php if ($article->updated_at) : ?>
+												| Updated at <?= $article->updated_at ?>
+												<?php endif ?>
+											</small>
+										</div>
+									</td>
 
-								<!-- writer -->
-								<td align="center" style="vertical-align: middle">
-									<font class="text-primary font-weight-bold" size="4"><?= $article->user ?></font>
-								</td>
-	
-								<!-- action -->
-								<td bgcolor="skyblue" align="center" style="vertical-align: middle">
-									<div>
-										<a href="<?= site_url('article/show/'.$article->slug) ?>" class="btn btn-small btn-info" title="PREVIEW" role="button" target="_blank">
-											<i class="fas fa-eye"></i>
-										</a>
+									<!-- status -->
+									<td bgcolor="papayawhip" align="center" style="vertical-align: middle">
+										<font class="<?= $article->draft === 'true' ? 'text-secondary' : 'text-success' ?> font-weight-bold" size="4">
+											<?= $article->draft === 'true' ? 'Draft' : 'Published' ?>
+										</font>
+									</td>
 
-										<a href="<?= site_url('admin/akademik/post/edit/'.$article->id) ?>" class="btn btn-small btn-info" title="EDIT" role="button"> 
-											<i class="fas fa-pen"></i>
-										</a>
+									<!-- writer -->
+									<td align="center" style="vertical-align: middle">
+										<font class="text-primary font-weight-bold" size="4"><?= $article->user ?></font>
+									</td>
+		
+									<!-- action -->
+									<td bgcolor="skyblue" align="center" style="vertical-align: middle">
+										<div>
+											<a href="<?= site_url('article/show/'.$article->slug) ?>" class="btn btn-small btn-info" title="PREVIEW" role="button" target="_blank">
+												<i class="fas fa-eye"></i>
+											</a>
 
-										<a href="<?= site_url('admin/akademik/post/delete/'.$article->id) ?>" class="btn btn-small btn-danger" title="DELETE" role="button" onclick="return confirm('⚠ Anda yakin ingin menghapus artikel ini?')">
-											<i class="fas fa-trash"></i>
-										</a>
-									</div>
-								</td>
-							</tr>
-							<?php endforeach ?>
+											<a href="<?= site_url('admin/akademik/post/edit/'.$article->id) ?>" class="btn btn-small btn-info" title="EDIT" role="button"> 
+												<i class="fas fa-pen"></i>
+											</a>
 
-							<!-- footer -->
-							<tr>
-								<td>
-									<!-- pagination -->
-									<?php
-									if (!empty($keyword) || !empty($status)) { 
-										/* do nothing... I make it like this, so when the user use the search feature, the pagination feature won't showing (because i still have problems with search and pagination feature combined) */
-									}
-									else {
-										echo $this->pagination->create_links();
-									}
-									?>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+											<a href="<?= site_url('admin/akademik/post/delete/'.$article->id) ?>" class="btn btn-small btn-danger" title="DELETE" role="button" onclick="return confirm('⚠ Anda yakin ingin menghapus artikel ini?')">
+												<i class="fas fa-trash"></i>
+											</a>
+										</div>
+									</td>
+								</tr>
+								<?php endforeach ?>
+
+								<!-- footer -->
+								<tr>
+									<td>
+										<!-- pagination -->
+										<?php
+										if (!empty($keyword) || !empty($status)) { 
+											/* do nothing... I make it like this, so when the user use the search feature, the pagination feature won't showing (because i still have problems with search and pagination feature combined) */
+										}
+										else {
+											echo $this->pagination->create_links();
+										}
+										?>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 				<!-- /.card -->
 			</div>

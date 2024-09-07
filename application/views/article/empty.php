@@ -9,26 +9,46 @@ $this->load->view('templates/background');
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
 
-	    <?php 
-	    $this->load->view('templates/sidebar'); 
-	    $this->load->view('templates/navbar');
-	    ?>
+		<?php 
+		$this->load->view('templates/sidebar'); 
+		$this->load->view('templates/navbar');
+		?>
 
-	    <div class="bg-transparent content-wrapper p-3">
-	    	<?php $this->load->view('templates/content-header') ?>
+		<div class="content-wrapper bg-transparent p-3">
 
-	    	<div class="container-fluid" style="max-width: 800px">
-	    		<div class="card card-outline card-warning article" style="background-color: oldlace">
-		    		<h1>Belum ada Artikel!</h1>
-		    		<p>Artikel mungkin masih di dalam draft, penulis akan segera menyelesaikannya... <span class="h1">👨‍💻</span></p>
+			<div class="container-fluid" style="max-width: 1000px">
+				
+				<div class="card card-outline card-success article" style="background-color: oldlace">
+
+					<!-- header -->
+					<div class="card-header">
+						<h1>📚 Daftar Artikel</h1>
+
+						<form method="get">
+							<label for="keyword">Cari Artikel: </label>
+							<input type="search" name="keyword" class="input" placeholder="Masukkan kata kunci.." value="<?= html_escape($keyword) ?>" maxlength="128">
+							&nbsp &nbsp
+							<button value="search" type="submit" class="btn-submit" style="background-color: aquamarine">
+								Cari <i class="fas fa-search"></i>
+							</button>
+						</form>
+					</div>
+
+					<!-- contents -->
+					<div class="card-body">
+						<h1>
+							Tidak ada yang ditemukan!
+						</h1>
+					</div>
+
 				</div>
-		    </div>
-	    	<!-- /.main-content -->
-	    	
-	    </div>
-	    <!-- /.content-wrapper -->
+				<!-- /.card -->
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- /.content-wrapper -->
 
-	    <?php $this->load->view('templates/footer') ?>
+	  <?php $this->load->view('templates/footer') ?>
 
 	</div>
 	<!-- /.wrapper -->

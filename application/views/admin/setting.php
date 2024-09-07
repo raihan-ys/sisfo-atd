@@ -49,17 +49,16 @@ $this->load->view('templates/background');
 						<div class="card-header"><h4>Picture</h4></div>
 						<div class="card-body">
 							<div class="text-center mb-2">
-								<a class="btn btn-info <?= !$current_user->avatar ? 'btn-block' : 'm-1' ?>" role="button" href="<?= site_url('admin/setting/avatar_upload') ?>">
+								<a class="btn btn-info btn-block" role="button" href="<?= site_url('admin/setting/avatar_upload') ?>">
 									Change Avatar
 								</a>
 								<?php if ($current_user->avatar) : ?>
-								<a class="btn btn-danger m-1" role="button" href="<?= site_url('admin/setting/avatar_remove') ?>" onclick="return confirm('Are you sure to remove avatar?')">
+								<a class="btn btn-danger btn-block" role="button" href="<?= site_url('admin/setting/avatar_remove') ?>" onclick="return confirm('Are you sure to remove avatar?')">
 									Remove Avatar
 								</a>
+								<?php endif ?>
 							</div>
-							<?php endif ?>
-							<img class="img elevation-2 avatar-preview mx-auto d-block" style="width: 200px; height: 200px;" src="<?= $current_user->avatar ? base_url('uploads/user-avatar/'.$current_user->avatar) :	base_url('assets/images/user.png') ?>" 
-							alt="<?= htmlentities($current_user->name, true) ?>">
+							<img class="img elevation-2 avatar-preview mx-auto d-block" style="width: 200px; height: 200px;" src="<?= $current_user->avatar ? base_url('uploads/user-avatar/'.$current_user->avatar) :	base_url('assets/images/user.png') ?>" alt="<?= htmlentities($current_user->name, true) ?>">
 						</div>
 					</div>
 
