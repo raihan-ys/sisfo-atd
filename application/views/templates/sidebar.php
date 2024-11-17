@@ -25,7 +25,7 @@
             <i class="nav-icon fas fa-envelope"></i> <?= htmlentities($current_user->email) ?>
           </small>
         </div>
-
+ 
       </div>
     </a>
     <?php endif ?>
