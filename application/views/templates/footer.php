@@ -21,6 +21,5 @@
 <script src="<?= base_url('assets/jquery/jquery.min.js') ?>"></script>
 <!-- Custom JS -->
 <script src="<?= base_url('js/javascript.js') ?>"></script>
-<script src="<?= base_url('js/calculator.js') ?>"></script>
 <!-- AdminLTE app -->
 <script src="<?= base_url('assets/adminlte/dist/js/adminlte.min.js') ?>"></script>
