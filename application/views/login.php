@@ -57,13 +57,13 @@ $this->load->view('templates/background');
 						<!-- form -->
 						<form method="POST">
 							<!-- username/email -->
-							<input class="<?= form_error('username') ? 'input-invalid' : 'input' ?>" type="text" name="username" title="Enter your e-mail or username" placeholder="E-mail atau Username* (Maks. 64 karakter)" value="<?= set_value('username') ?>" required>
+							<input class="<?= form_error('username') ? 'input-invalid' : 'input' ?>" type="text" name="username" title="Enter your e-mail or username" placeholder="admin" value="<?= set_value('username') ?>" required>
 							<span class="fas fa-user"></span>
 							<?= form_error('username', '<div class="text-tomato font-weight-bold">', '</div>') ?>
 							<br><br>
 
 							<!-- password -->
-							<input class="<?= form_error('password') ? 'input-invalid' : 'input' ?>" type="password" name="password" id="password" title="Enter your password" placeholder="Password*" value="<?= set_value('password') ?>" required>
+							<input class="<?= form_error('password') ? 'input-invalid' : 'input' ?>" type="password" name="password" id="password" title="Enter your password" placeholder="admin" value="<?= set_value('password') ?>" required>
 							<span class="fas fa-lock"></span>
 							<?= form_error('password', '<div class="text-tomato font-weight-bold">', '</div>') ?>
 							<br>

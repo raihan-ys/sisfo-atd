@@ -15,12 +15,12 @@ $(document).ready(function() {
 
 	// Play or pause the background video.
 	btn_background.on('click', function() {
-		if (background.paused) {
+		if (background[0].played) {
+			background.paused();
+			btn_background.html('<i class="fas fa-play"></i>');
+		} else {
 			background.play();
 			btn_background.html('<i class="fas fa-pause"></i>');
-		} else {
-			background[0].pause();
-			btn_background.html('<i class="fas fa-play"></i>');
 		}
 	});
 
